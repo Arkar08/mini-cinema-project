@@ -20,6 +20,6 @@ const seatPriceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const seatPrice = mongoose.model("seatPrice", seatPriceSchema);
+const SeatPrice = mongoose.model("SeatPrice", seatPriceSchema);
 
-export default seatPrice;
+export default SeatPrice;

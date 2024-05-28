@@ -1,6 +1,6 @@
 import Seats from "../models/SeatSchema.js";
 import Rooms from "../models/roomSchema.js";
-import seatPrice from "../models/seatPriceSchema.js";
+import SeatPrice from "../models/seatPriceSchema.js";
 // post price
 export const postSeatPriceController = async (req, res) => {
   const { price, roomId, seatId } = req.body;
@@ -16,7 +16,7 @@ export const postSeatPriceController = async (req, res) => {
     if (!room) {
       return res.status(400).json("invalid roomId");
     }
-    const newPrice = new seatPrice({
+    const newPrice = new SeatPrice({
       price,
       roomId: room,
       seatId: seat,
@@ -33,7 +33,7 @@ export const postSeatPriceController = async (req, res) => {
 
 export const getSeatPriceController = async (req, res) => {
   try {
-    const getPrice = await seatPrice.find();
+    const getPrice = await SeatPrice.find();
     return res.status(200).json(getPrice);
   } catch (error) {
     console.log("getSeatPriceController", error);
@@ -45,7 +45,7 @@ export const getSeatPriceController = async (req, res) => {
 export const getSeatPriceIdController = async (req, res) => {
   const { id } = req.params;
   try {
-    const getPriceId = await seatPrice.findById({ _id: id });
+    const getPriceId = await SeatPrice.findById({ _id: id });
     if (getPriceId) {
       return res.status(200).json(getPriceId);
     } else {
@@ -61,7 +61,7 @@ export const getSeatPriceIdController = async (req, res) => {
 export const patchSeatPriceController = async (req, res) => {
   const { id } = req.params;
   try {
-    const patchPrice = await seatPrice.findOneAndUpdate(
+    const patchPrice = await SeatPrice.findOneAndUpdate(
       { _id: id },
       { ...req.body },
       { new: true }
@@ -77,7 +77,7 @@ export const patchSeatPriceController = async (req, res) => {
 export const deleteSeatPriceController = async (req, res) => {
   const { id } = req.params;
   try {
-    const deletePrice = await seatPrice.findOneAndDelete({ _id: id });
+    const deletePrice = await SeatPrice.findOneAndDelete({ _id: id });
     if (deletePrice) {
       return res.status(200).json("delete successfully");
     } else {
