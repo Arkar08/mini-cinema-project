@@ -6,12 +6,15 @@ import {
   patchMovieControllers,
   postMovieControllers,
 } from "../controllers/movie.js";
-
+import {
+  authorizeAdmin,
+  authMiddleware,
+} from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.get("/", getMovieControllers);
-router.post("/", postMovieControllers);
+router.post("/", authMiddleware, authorizeAdmin, postMovieControllers);
 router.get("/:id", getMovieIdControllers);
-router.patch("/:id", patchMovieControllers);
-router.delete("/:id", deleteMovieControllers);
+router.patch("/:id", authMiddleware, authorizeAdmin, patchMovieControllers);
+router.delete("/:id", authMiddleware, authorizeAdmin, deleteMovieControllers);
 export default router;

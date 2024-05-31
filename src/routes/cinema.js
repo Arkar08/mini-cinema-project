@@ -6,13 +6,16 @@ import {
   patchCinemaController,
   postCinemaController,
 } from "../controllers/cinema.js";
-
+import {
+  authMiddleware,
+  authorizeAdmin,
+} from "../middleware/authMiddleware.js";
 const router = express.Router();
 
-router.post("/", postCinemaController);
+router.post("/", authMiddleware, authorizeAdmin, postCinemaController);
 router.get("/", getCinemaController);
 router.get("/:id", getCinemaIdController);
-router.patch("/:id", patchCinemaController);
-router.delete("/:id", deleteCinemaController);
+router.patch("/:id", authMiddleware, authorizeAdmin, patchCinemaController);
+router.delete("/:id", authMiddleware, authorizeAdmin, deleteCinemaController);
 
 export default router;

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const secret_key = "dksjfkdjfkdjf";
+export const secret_key = "dksjfkdjfkdjf";
 const node_env = "development";
 
 const generateToken = async (res, userId) => {

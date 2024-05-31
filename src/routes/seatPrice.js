@@ -6,13 +6,22 @@ import {
   patchSeatPriceController,
   postSeatPriceController,
 } from "../controllers/seatPrice.js";
+import {
+  authorizeAdmin,
+  authMiddleware,
+} from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", postSeatPriceController);
+router.post("/", authMiddleware, authorizeAdmin, postSeatPriceController);
 router.get("/", getSeatPriceController);
 router.get("/:id", getSeatPriceIdController);
-router.patch("/:id", patchSeatPriceController);
-router.delete("/:id", deleteSeatPriceController);
+router.patch("/:id", authMiddleware, authorizeAdmin, patchSeatPriceController);
+router.delete(
+  "/:id",
+  authMiddleware,
+  authorizeAdmin,
+  deleteSeatPriceController
+);
 
 export default router;
