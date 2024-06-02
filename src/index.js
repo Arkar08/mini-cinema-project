@@ -9,6 +9,7 @@ import bookingRoute from "./routes/bookings.js";
 import userRoute from "./routes/user.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ export const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
