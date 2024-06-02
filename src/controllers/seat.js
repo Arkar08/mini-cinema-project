@@ -1,4 +1,4 @@
-import Seats from "../models/SeatSchema.js";
+import Seats from "../models/oneSeatSchema.js";
 import Rooms from "../models/roomSchema.js";
 
 // post seat
