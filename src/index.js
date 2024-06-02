@@ -8,13 +8,16 @@ import seatPriceRoute from "./routes/seatPrice.js";
 import bookingRoute from "./routes/bookings.js";
 import userRoute from "./routes/user.js";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 
 //routes
 

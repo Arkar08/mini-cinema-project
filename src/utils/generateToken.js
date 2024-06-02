@@ -1,10 +1,7 @@
 import jwt from "jsonwebtoken";
 
-export const secret_key = "dksjfkdjfkdjf";
-const node_env = "development";
-
 const generateToken = async (res, userId) => {
-  const token = jwt.sign({ userId }, secret_key, {
+  const token = jwt.sign({ userId }, process.env.secret_key, {
     expiresIn: "30d",
   });
   if (!token) {
@@ -12,7 +9,7 @@ const generateToken = async (res, userId) => {
   }
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: node_env !== "development",
+    secure: process.env.node_env !== "development",
     sameSite: "strict",
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });

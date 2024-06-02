@@ -1,11 +1,10 @@
 import jwt from "jsonwebtoken";
-import { secret_key } from "../utils/generateToken.js";
 import User from "../models/userSchema.js";
 export const authMiddleware = async (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     try {
-      const decoded = jwt.verify(token, secret_key);
+      const decoded = jwt.verify(token, process.env.secret_key);
       req.user = await User.findById(decoded.userId).select("-password");
       next();
     } catch (error) {
