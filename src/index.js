@@ -31,9 +31,9 @@ app.use("/api/v1/price", seatPriceRoute);
 app.use("/api/v1/bookings", bookingRoute);
 app.use("/api/v1/users", userRoute);
 
-//app.get("/", (req, res) => {
-//return res.status(200).json("hello world");
-//});
+app.get("/", (req, res) => {
+  return res.status(200).json("hello world");
+});
 
 app.listen(PORT, () => {
   connectedToDb();
