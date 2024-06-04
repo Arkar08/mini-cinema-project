@@ -21,8 +21,8 @@ app.use(cors());
 
 export const PORT = process.env.PORT || 5000;
 connectedToDb();
-//routes
 
+//routes
 app.use("/api/v1/movies", movieRoute);
 app.use("/api/v1/cinemas", cinemaRoute);
 app.use("/api/v1/rooms", roomRoute);
