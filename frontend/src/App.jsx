@@ -1,5 +1,7 @@
+import View from "./routes/View";
+
 const App = () => {
-  return <h1 className="text-xl text-blue-400">Hello world</h1>;
+  return <View />;
 };
 
 export default App;
