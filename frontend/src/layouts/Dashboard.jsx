@@ -8,7 +8,9 @@ const Dashboard = () => {
       <Sidebar />
       <div className="flex flex-col">
         <Navbar />
-        <Outlet />
+        <div className="w-[100%] h-[100%]">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
