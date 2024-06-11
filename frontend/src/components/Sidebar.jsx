@@ -8,7 +8,7 @@ const Sidebar = () => {
       <Link to="/">
         <div className="flex justify-center items-center mt-4">
           <h1 className="p-2 text-xl text-red-600 uppercase font-bold">
-            Sein Movie Theater
+            Sein Movie Theatre
           </h1>
           <img
             src={logo}
