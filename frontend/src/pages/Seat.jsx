@@ -3,7 +3,7 @@ import CardSeat from "../components/CardSeat";
 const Seat = () => {
   return (
     <div className="h-[100%]">
-      <div className="flex justify-between items-center m-6">
+      <div className="flex justify-between items-center m-4">
         <input
           type="text"
           placeholder="search seat..."
