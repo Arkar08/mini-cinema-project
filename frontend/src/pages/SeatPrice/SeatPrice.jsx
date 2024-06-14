@@ -1,4 +1,4 @@
-import PriceTable from "../components/PriceTable";
+import PriceTable from "./PriceTable";
 import { Button } from "@material-tailwind/react";
 
 const SeatPrice = () => {

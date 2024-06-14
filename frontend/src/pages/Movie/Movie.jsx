@@ -1,21 +1,21 @@
 import { Button } from "@material-tailwind/react";
-import CardSeat from "../components/CardSeat";
+import MovieCard from "./MovieCard";
 
-const Seat = () => {
+const Movie = () => {
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
         <input
           type="text"
-          placeholder="search seat..."
+          placeholder="search movie..."
           className="w-[300px] p-2 border outline-none rounded-md"
         />
-        <Button className="text-red-500">New Seat</Button>
+        <Button className="text-red-500">New </Button>
       </div>
       <hr />
-      <CardSeat />
+      <MovieCard />
     </div>
   );
 };
 
-export default Seat;
+export default Movie;

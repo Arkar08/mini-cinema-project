@@ -1,7 +1,14 @@
-import Card from "../components/Card";
 import { Button } from "@material-tailwind/react";
+import { useState } from "react";
+import Card from "./Card";
+import CreateCinema from "./CreateCinema";
 
 const Cinema = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -10,7 +17,10 @@ const Cinema = () => {
           placeholder="search cinema..."
           className="w-[300px] p-2 border outline-none rounded-md"
         />
-        <Button className="text-red-500">New </Button>
+        <Button className="text-red-500" onClick={handleClick}>
+          New{" "}
+        </Button>
+        <CreateCinema open={open} handleClick={handleClick} />
       </div>
       <hr />
       <Card />

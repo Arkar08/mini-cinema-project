@@ -1,13 +1,13 @@
 import Dashboard from "../layouts/Dashboard.jsx";
-import Booking from "../pages/Booking.jsx";
-import Cinema from "../pages/Cinema.jsx";
-import Customer from "../pages/Customer.jsx";
-import Movie from "../pages/Movie.jsx";
+import Booking from "../pages/Booking/Booking.jsx";
+import Customer from "../pages/Customer/Customer.jsx";
 import NotFound from "../pages/NotFound.jsx";
-import Room from "../pages/Room.jsx";
-import Seat from "../pages/Seat.jsx";
-import SeatPrice from "../pages/SeatPrice.jsx";
+import Cinema from "../pages/Cinema/Cinema.jsx";
+import Room from "../pages/Room/Room.jsx";
+import Seat from "../pages/Seat/Seat.jsx";
+import SeatPrice from "../pages/SeatPrice/SeatPrice.jsx";
 import Home from "../pages/Home.jsx";
+import Movie from "../pages/Movie/Movie.jsx";
 
 const routes = [
   {

@@ -1,5 +1,5 @@
-import oneChair from "../Data/one_chair.jpg";
-import coupleChair from "../Data/couple_chair.jpg";
+import oneChair from "../../Data/one_chair.jpg";
+import coupleChair from "../../Data/couple_chair.jpg";
 const CardSeat = () => {
   return (
     <div className="grid grid-cols-5 gap-4 px-8 mt-2">

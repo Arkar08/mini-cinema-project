@@ -1,4 +1,4 @@
-import cinemaImg from "../Data/cinemalist_photo.jpg";
+import cinemaImg from "../../Data/cinemalist_photo.jpg";
 
 const Card = () => {
   return (

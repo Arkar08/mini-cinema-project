@@ -1,4 +1,5 @@
 import avator from "../Data/avator.jpg";
+import { Button } from "@material-tailwind/react";
 const Navbar = () => {
   return (
     <div className="w-[80vw] bg-black h-[100px]">
@@ -15,11 +16,9 @@ const Navbar = () => {
           <img
             src={avator}
             alt="profile"
-            className="w-[60px] h-[60px] rounded-full object-cover object-center"
+            className="w-[60px] h-[60px] rounded-full object-cover object-center p-2"
           />
-          <button className="p-2 bg-red-500 ml-2 rounded-md text-xl font-bold">
-            Logout
-          </button>
+          <Button className="bg-red-500">Logout</Button>
         </div>
       </div>
     </div>

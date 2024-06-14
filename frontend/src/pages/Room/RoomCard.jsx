@@ -1,4 +1,4 @@
-import room from "../Data/room.avif";
+import room from "../../Data/room.avif";
 
 const RoomCard = () => {
   return (
