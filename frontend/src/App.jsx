@@ -1,7 +1,12 @@
 import View from "./routes/View";
+import { ThemeProvider } from "@material-tailwind/react";
 
 const App = () => {
-  return <View />;
+  return (
+    <ThemeProvider>
+      <View />
+    </ThemeProvider>
+  );
 };
 
 export default App;

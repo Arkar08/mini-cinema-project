@@ -1,4 +1,5 @@
 import MovieCard from "../components/MovieCard";
+import { Button } from "@material-tailwind/react";
 
 const Movie = () => {
   return (
@@ -9,7 +10,7 @@ const Movie = () => {
           placeholder="search movie..."
           className="w-[300px] p-2 border outline-none rounded-md"
         />
-        <button className="p-2 bg-red-500 text-white rounded-md">New</button>
+        <Button className="text-red-500">New </Button>
       </div>
       <hr />
       <MovieCard />

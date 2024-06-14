@@ -1,3 +1,4 @@
+import { Button } from "@material-tailwind/react";
 import CardSeat from "../components/CardSeat";
 
 const Seat = () => {
@@ -9,9 +10,7 @@ const Seat = () => {
           placeholder="search seat..."
           className="w-[300px] p-2 border outline-none rounded-md"
         />
-        <button className="p-2 bg-red-500 text-white rounded-md">
-          New Seat
-        </button>
+        <Button className="text-red-500">New Seat</Button>
       </div>
       <hr />
       <CardSeat />
