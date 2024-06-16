@@ -8,11 +8,17 @@ import Seat from "../pages/Seat/Seat.jsx";
 import SeatPrice from "../pages/SeatPrice/SeatPrice.jsx";
 import Home from "../pages/Home.jsx";
 import Movie from "../pages/Movie/Movie.jsx";
-
+import Login from "../pages/Login.jsx";
+import Signup from "../pages/Signup.jsx";
+import ProvideRoute from "../layouts/ProvideRoute.jsx";
 const routes = [
   {
     path: "/",
-    Component: Dashboard,
+    element: (
+      <ProvideRoute>
+        <Dashboard />
+      </ProvideRoute>
+    ),
     errorElement: <NotFound />,
     children: [
       {
@@ -48,6 +54,14 @@ const routes = [
         Component: Booking,
       },
     ],
+  },
+  {
+    path: "/login",
+    Component: Login,
+  },
+  {
+    path: "/signup",
+    Component: Signup,
   },
 ];
 

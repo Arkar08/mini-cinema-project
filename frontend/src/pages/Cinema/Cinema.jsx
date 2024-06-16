@@ -2,6 +2,7 @@ import { Button } from "@material-tailwind/react";
 import { useState } from "react";
 import Card from "./Card";
 import CreateCinema from "./CreateCinema";
+import UseFetchCinema from "../../hooks/UseFetchCinema";
 
 const Cinema = () => {
   const [open, setOpen] = useState(false);
@@ -9,6 +10,8 @@ const Cinema = () => {
   const handleClick = () => {
     setOpen(!open);
   };
+  const { data: cinemas } = UseFetchCinema();
+  console.log(cinemas);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">

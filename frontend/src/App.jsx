@@ -1,10 +1,10 @@
-import View from "./routes/View";
+import Role from "./layouts/Role";
 import { ThemeProvider } from "@material-tailwind/react";
 
 const App = () => {
   return (
     <ThemeProvider>
-      <View />
+      <Role />
     </ThemeProvider>
   );
 };

@@ -1,10 +1,13 @@
-import { Button } from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
 import MovieCard from "./MovieCard";
 import { useState } from "react";
 import CreateMovie from "./CreateMovie";
+import UseFetchMovies from "../../hooks/UseFetchMovies";
 
 const Movie = () => {
   const [isClose, setIsClose] = useState(false);
+  const { isFetching, error, data, isError } = UseFetchMovies();
+  console.log(data);
   const handleClose = () => {
     setIsClose(!isClose);
   };
@@ -22,7 +25,12 @@ const Movie = () => {
         <CreateMovie isClose={isClose} handleClose={handleClose} />
       </div>
       <hr />
-      <MovieCard />
+      {isFetching ? <Spinner /> : <MovieCard data={data} />}
+      {isError && (
+        <div>
+          <h2>{error}</h2>
+        </div>
+      )}
     </div>
   );
 };

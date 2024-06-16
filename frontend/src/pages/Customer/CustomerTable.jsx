@@ -1,3 +1,4 @@
+import { FaEdit, FaTrash } from "react-icons/fa";
 const CustomerTable = () => {
   return (
     <table className="w-[90%] border-collapse border  mt-4 mx-auto">
@@ -20,6 +21,10 @@ const CustomerTable = () => {
           <td className="p-2">12.2.2024</td>
           <td className="p-2">Yangon</td>
           <td className="p-2">Insein</td>
+          <td className="flex p-2 items-center justify-center">
+            <FaEdit size={18} className="mx-1 text-blue-600 cursor-pointer" />
+            <FaTrash size={18} className="cursor-pointer mx-1 text-red-600" />
+          </td>
         </tr>
         <tr className="text-center  border text-red-500">
           <td className="p-2">1</td>
@@ -28,6 +33,10 @@ const CustomerTable = () => {
           <td className="p-2">12.2.2024</td>
           <td className="p-2">Yangon</td>
           <td className="p-2">Insein</td>
+          <td className="flex p-2 items-center justify-center">
+            <FaEdit size={18} className="mx-1 text-blue-600 cursor-pointer" />
+            <FaTrash size={18} className="cursor-pointer mx-1 text-red-600" />
+          </td>
         </tr>
         <tr className="text-center  border text-red-500">
           <td className="p-2">1</td>
@@ -36,6 +45,10 @@ const CustomerTable = () => {
           <td className="p-2">12.2.2024</td>
           <td className="p-2">Yangon</td>
           <td className="p-2">Insein</td>
+          <td className="flex p-2 items-center justify-center">
+            <FaEdit size={18} className="mx-1 text-blue-600 cursor-pointer" />
+            <FaTrash size={18} className="cursor-pointer mx-1 text-red-600" />
+          </td>
         </tr>
         <tr className="text-center  border text-red-500">
           <td className="p-2">1</td>
@@ -44,6 +57,10 @@ const CustomerTable = () => {
           <td className="p-2">12.2.2024</td>
           <td className="p-2">Yangon</td>
           <td className="p-2">Insein</td>
+          <td className="flex p-2 items-center justify-center">
+            <FaEdit size={18} className="mx-1 text-blue-500 cursor-pointer" />
+            <FaTrash size={18} className="cursor-pointer mx-1 text-red-600" />
+          </td>
         </tr>
       </tbody>
     </table>

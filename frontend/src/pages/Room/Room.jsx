@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Button } from "@material-tailwind/react";
 import RoomCard from "./RoomCard";
 import CreateRoom from "./CreateRoom";
+import UseFetchRoom from "../../hooks/UseFetchRoom";
 
 const Room = () => {
   const [isopen, setIsopen] = useState(false);
   const handleOpen = () => {
     setIsopen(!isopen);
   };
+  const { data: rooms } = UseFetchRoom();
+  console.log(rooms);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
