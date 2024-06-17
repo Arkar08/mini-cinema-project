@@ -1,10 +1,13 @@
+import LoginContextProvider from "./context/LoginContext";
 import Role from "./layouts/Role";
 import { ThemeProvider } from "@material-tailwind/react";
 
 const App = () => {
   return (
     <ThemeProvider>
-      <Role />
+      <LoginContextProvider>
+        <Role />
+      </LoginContextProvider>
     </ThemeProvider>
   );
 };

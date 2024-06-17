@@ -6,45 +6,18 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import UseLoginMutations from "../hooks/UseLoginMutations";
+import { LoginContext } from "../context/LoginContext";
 
 const Login = () => {
-  const loginMutations = UseLoginMutations();
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    loginMutations.mutate(user);
-  };
-
-  useEffect(() => {
-    if (loginMutations.isSuccess) {
-      localStorage.setItem("token", loginMutations.data.token);
-      window.location.href = "/";
-    }
-    if (loginMutations.isError) {
-      console.log(loginMutations.error);
-    }
-  }, [loginMutations.isSuccess, loginMutations.isError]);
-
+  const { handleChange, handleSubmit, user, error } = useContext(LoginContext);
   return (
     <Card color="transparent" shadow={false} className="border p-4 shadow-lg">
       <Typography variant="h4" color="blue-gray">
         Login
       </Typography>
+      {error && <div>{error.message}</div>}
       <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
           <Typography variant="h6" color="blue-gray" className="-mb-3">

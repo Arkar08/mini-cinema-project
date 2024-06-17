@@ -19,7 +19,7 @@ const UseLoginMutations = () => {
 };
 
 const logout = async () => {
-  return await Axios.post("/users/logout");
+  await Axios.post("/users/logout");
 };
 export const UseLogoutMutation = () => {
   return useMutation({
