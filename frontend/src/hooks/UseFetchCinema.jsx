@@ -7,11 +7,10 @@ const getCinema = async () => {
 };
 
 const UseFetchCinema = () => {
-  const { isFetching, isError, error, data } = useQuery({
+  return useQuery({
     queryKey: ["cinemas"],
     queryFn: getCinema,
   });
-  return { isFetching, isError, error, data };
 };
 
 export default UseFetchCinema;

@@ -1,16 +1,12 @@
-import { Button } from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
 import CardSeat from "./CardSeat";
-import { useState } from "react";
 import CreateSeat from "./CreateSeat";
-import UseFetchSeat from "../../hooks/UseFetchSeat";
+import { useContext } from "react";
+import { SeatContext } from "../../context/SeatContext";
 
 const Seat = () => {
-  const [oneSeat, setOneSeat] = useState(false);
-  const handleSeat = () => {
-    setOneSeat(!oneSeat);
-  };
-  const { data: seats } = UseFetchSeat();
-  console.log(seats);
+  const { handleSeat, isFetching, isError, error, seats } =
+    useContext(SeatContext);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -22,10 +18,26 @@ const Seat = () => {
         <Button className="text-red-500" onClick={handleSeat}>
           New
         </Button>
-        <CreateSeat oneSeat={oneSeat} handleSeat={handleSeat} />
+        <CreateSeat />
       </div>
       <hr />
-      <CardSeat />
+      {isFetching ? (
+        <div className="flex items-center justify-center">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="grid grid-cols-5 gap-4 px-8 mt-2">
+          {seats &&
+            seats.map((s) => {
+              return <CardSeat key={s._id} s={s} />;
+            })}
+        </div>
+      )}
+      {isError && (
+        <div>
+          <h2>{error}</h2>
+        </div>
+      )}
     </div>
   );
 };

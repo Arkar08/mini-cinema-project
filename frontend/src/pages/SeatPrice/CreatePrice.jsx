@@ -8,9 +8,12 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
+import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { PriceContext } from "../../context/PriceContext";
 
-const CreatePrice = ({ active, handleActive }) => {
+const CreatePrice = () => {
+  const { active, handleActive } = useContext(PriceContext);
   return (
     <Dialog
       size="xs"

@@ -1,10 +1,11 @@
 import { Spinner } from "@material-tailwind/react";
-import UseFetchBookings from "../../hooks/UseFetchBookings";
+
 import BookingTable from "./BookingTable";
+import { useContext } from "react";
+import { BookingContext } from "../../context/BookingContext";
 
 const Booking = () => {
-  const { isLoading, isError, error, data: bookings } = UseFetchBookings();
-  console.log(bookings);
+  const { isFetching, isError, error } = useContext(BookingContext);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -15,7 +16,7 @@ const Booking = () => {
         />
       </div>
       <hr />
-      {isLoading ? <Spinner /> : <BookingTable bookings={bookings} />}
+      {isFetching ? <Spinner /> : <BookingTable />}
       {isError && <div>{error}</div>}
     </div>
   );

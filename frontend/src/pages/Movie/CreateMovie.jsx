@@ -8,9 +8,12 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
+import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { MovieContext } from "../../context/MovieContext";
 
-const CreateMovie = ({ isClose, handleClose }) => {
+const CreateMovie = () => {
+  const { isClose, handleClose } = useContext(MovieContext);
   return (
     <Dialog
       size="xs"

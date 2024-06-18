@@ -8,9 +8,12 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
+import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { CinemaContext } from "../../context/CinemaContext";
 
-const CreateCinema = ({ open, handleClick }) => {
+const CreateCinema = () => {
+  const { open, handleClick } = useContext(CinemaContext);
   return (
     <Dialog
       size="xs"

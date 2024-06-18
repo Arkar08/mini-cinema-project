@@ -9,9 +9,12 @@ import {
   Input,
   Radio,
 } from "@material-tailwind/react";
+import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { SeatContext } from "../../context/SeatContext";
 
-const CreateSeat = ({ oneSeat, handleSeat }) => {
+const CreateSeat = () => {
+  const { handleSeat, oneSeat } = useContext(SeatContext);
   const type = ["single", "couple"];
   return (
     <Dialog

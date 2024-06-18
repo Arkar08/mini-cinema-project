@@ -8,8 +8,11 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
+import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
-const CreateRoom = ({ isopen, handleOpen }) => {
+import { RoomContext } from "../../context/RoomContext";
+const CreateRoom = () => {
+  const { isopen, handleOpen } = useContext(RoomContext);
   return (
     <Dialog
       size="xs"

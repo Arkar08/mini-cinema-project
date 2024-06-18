@@ -1,16 +1,11 @@
-import { useState } from "react";
 import PriceTable from "./PriceTable";
-import { Button } from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
 import CreatePrice from "./CreatePrice";
-import UseFetchPrice from "../../hooks/UseFetchPrice";
+import { useContext } from "react";
+import { PriceContext } from "../../context/PriceContext";
 
 const SeatPrice = () => {
-  const [active, setActive] = useState(false);
-  const handleActive = () => {
-    setActive(!active);
-  };
-  const { data: price } = UseFetchPrice();
-  console.log(price);
+  const { handleActive, error, isError, isFetching } = useContext(PriceContext);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -22,10 +17,21 @@ const SeatPrice = () => {
         <Button className="text-red-500" onClick={handleActive}>
           New{" "}
         </Button>
-        <CreatePrice active={active} handleActive={handleActive} />
+        <CreatePrice />
       </div>
       <hr />
-      <PriceTable />
+      {isFetching ? (
+        <div className="flex justify-center items-center">
+          <Spinner />
+        </div>
+      ) : (
+        <PriceTable />
+      )}
+      {isError && (
+        <div>
+          <h2>{error}</h2>
+        </div>
+      )}
     </div>
   );
 };

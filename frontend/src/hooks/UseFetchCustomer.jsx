@@ -7,11 +7,10 @@ const getUser = async () => {
 };
 
 const UseFetchCustomer = () => {
-  const { isFetching, isError, data, error } = useQuery({
+  return useQuery({
     queryKey: ["users"],
     queryFn: getUser,
   });
-  return { isFetching, isError, data, error };
 };
 
 export default UseFetchCustomer;

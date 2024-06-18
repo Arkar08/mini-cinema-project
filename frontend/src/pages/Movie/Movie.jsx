@@ -1,16 +1,12 @@
 import { Button, Spinner } from "@material-tailwind/react";
 import MovieCard from "./MovieCard";
-import { useState } from "react";
 import CreateMovie from "./CreateMovie";
-import UseFetchMovies from "../../hooks/UseFetchMovies";
+import { useContext } from "react";
+import { MovieContext } from "../../context/MovieContext";
 
 const Movie = () => {
-  const [isClose, setIsClose] = useState(false);
-  const { isFetching, error, data, isError } = UseFetchMovies();
-  console.log(data);
-  const handleClose = () => {
-    setIsClose(!isClose);
-  };
+  const { isFetching, isError, handleClose, error, movies } =
+    useContext(MovieContext);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -22,10 +18,19 @@ const Movie = () => {
         <Button className="text-red-500" onClick={handleClose}>
           New{" "}
         </Button>
-        <CreateMovie isClose={isClose} handleClose={handleClose} />
+        <CreateMovie />
       </div>
       <hr />
-      {isFetching ? <Spinner /> : <MovieCard data={data} />}
+      {isFetching ? (
+        <Spinner />
+      ) : (
+        <div className="grid grid-cols-4 m-4 gap-4">
+          {movies &&
+            movies.map((m) => {
+              return <MovieCard key={m._id} m={m} />;
+            })}
+        </div>
+      )}
       {isError && (
         <div>
           <h2>{error}</h2>

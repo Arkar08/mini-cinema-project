@@ -7,10 +7,9 @@ const getRoom = async () => {
 };
 
 const UseFetchRoom = () => {
-  const { isFetching, isError, error, data } = useQuery({
+  return useQuery({
     queryKey: ["rooms"],
     queryFn: getRoom,
   });
-  return { isFetching, isError, error, data };
 };
 export default UseFetchRoom;
