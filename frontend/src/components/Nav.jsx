@@ -7,31 +7,31 @@ const navlinks = [
   },
   {
     title: "Customer",
-    url: "/customer",
+    url: "/admin/customer",
   },
   {
     title: "Cinema",
-    url: "/cinema",
+    url: "/admin/cinema",
   },
   {
     title: "Movie",
-    url: "/movie",
+    url: "/admin/movie",
   },
   {
     title: "Room",
-    url: "/room",
+    url: "/admin/room",
   },
   {
     title: "Seat",
-    url: "/seat",
+    url: "/admin/seat",
   },
   {
     title: "SeatPrice",
-    url: "/price",
+    url: "/admin/price",
   },
   {
     title: "Booking",
-    url: "/booking",
+    url: "/admin/booking",
   },
 ];
 

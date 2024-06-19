@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import jwt from "jsonwebtoken";
 import User from "../models/userSchema.js";
 export const authMiddleware = async (req, res, next) => {

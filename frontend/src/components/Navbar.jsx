@@ -13,6 +13,7 @@ const Navbar = ({ handleBtn }) => {
   useEffect(() => {
     if (logout.isSuccess) {
       localStorage.removeItem("token");
+      localStorage.removeItem("isAdmin");
       return (window.location.href = "/login");
     }
     if (logout.isError) {

@@ -11,12 +11,23 @@ import Movie from "../pages/Movie/Movie.jsx";
 import Login from "../pages/Login.jsx";
 import Signup from "../pages/Signup.jsx";
 import ProvideRoute from "../layouts/ProvideRoute.jsx";
+import User from "../layouts/User.jsx";
+import HomeUser from "../pages/UserView/HomeUser.jsx";
+import CinemaUser from "../pages/UserView/CinemaUser.jsx";
+
+const getPermission = () => {
+  return localStorage.getItem("isAdmin") === "true";
+};
 const routes = [
   {
     path: "/",
-    element: (
+    element: getPermission() ? (
       <ProvideRoute>
         <Dashboard />
+      </ProvideRoute>
+    ) : (
+      <ProvideRoute>
+        <User />
       </ProvideRoute>
     ),
     errorElement: <NotFound />,
@@ -26,32 +37,51 @@ const routes = [
         Component: Home,
       },
       {
-        path: "customer",
+        path: "admin/customer",
         Component: Customer,
       },
       {
-        path: "cinema",
+        path: "admin/cinema",
         Component: Cinema,
       },
       {
-        path: "movie",
+        path: "admin/movie",
         Component: Movie,
       },
       {
-        path: "room",
+        path: "admin/room",
         Component: Room,
       },
       {
-        path: "seat",
+        path: "admin/seat",
         Component: Seat,
       },
       {
-        path: "price",
+        path: "admin/price",
         Component: SeatPrice,
       },
       {
-        path: "booking",
+        path: "admin/booking",
         Component: Booking,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: getPermission() ? (
+      <ProvideRoute>
+        <User />
+      </ProvideRoute>
+    ) : null,
+    errorElement: <NotFound />,
+    children: [
+      {
+        index: true,
+        Component: HomeUser,
+      },
+      {
+        path: "user/cinema",
+        Component: CinemaUser,
       },
     ],
   },
