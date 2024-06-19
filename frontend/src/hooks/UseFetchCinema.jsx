@@ -1,4 +1,5 @@
-import { useQuery } from "react-query";
+/* eslint-disable no-unreachable */
+import { useMutation, useQuery } from "react-query";
 import Axios from "../Api/Apiconfig";
 
 const getCinema = async () => {
@@ -6,11 +7,27 @@ const getCinema = async () => {
   return res.data;
 };
 
+const postCinema = async (userData) => {
+  try {
+    const res = await Axios.post("/cinemas", userData);
+    return res;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const UseFetchCinema = () => {
-  return useQuery({
+  const { isFetching, isError, data, error } = useQuery({
     queryKey: ["cinemas"],
     queryFn: getCinema,
   });
+  const mutation = useMutation({
+    mutationKey: ["cinemas"],
+    mutationFn: (userData) => {
+      return postCinema(userData);
+    },
+  });
+  return { isFetching, isError, data, error, mutation };
 };
 
 export default UseFetchCinema;

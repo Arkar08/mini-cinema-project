@@ -6,15 +6,46 @@ export const CinemaContext = createContext();
 
 const CinemaContextProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
+  const [createCinema, setCreateCinema] = useState({
+    name: "",
+    location: "",
+  });
 
+  const handleCreate = (e) => {
+    const { name, value } = e.target;
+
+    setCreateCinema((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
   const handleClick = () => {
     setOpen(!open);
   };
-  const { isFetching, isError, error, data: cinemas } = UseFetchCinema();
+  const {
+    isFetching,
+    isError,
+    error,
+    data: cinemas,
+    mutation,
+  } = UseFetchCinema();
+  const handleSave = (e) => {
+    e.preventDefault();
+    mutation.mutate(createCinema);
+  };
 
   return (
     <CinemaContext.Provider
-      value={{ handleClick, open, cinemas, isFetching, isError, error }}
+      value={{
+        handleClick,
+        open,
+        cinemas,
+        isFetching,
+        isError,
+        error,
+        createCinema,
+        handleCreate,
+        handleSave,
+      }}
     >
       {children}
     </CinemaContext.Provider>

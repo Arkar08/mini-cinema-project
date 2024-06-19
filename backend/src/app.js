@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import express from "express";
 import connectedToDb from "./database/connectedToDb.js";
 import movieRoute from "./routes/movie.js";

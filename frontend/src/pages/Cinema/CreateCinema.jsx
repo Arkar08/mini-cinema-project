@@ -13,7 +13,8 @@ import { RxCross2 } from "react-icons/rx";
 import { CinemaContext } from "../../context/CinemaContext";
 
 const CreateCinema = () => {
-  const { open, handleClick } = useContext(CinemaContext);
+  const { open, handleClick, createCinema, handleCreate, handleSave } =
+    useContext(CinemaContext);
   return (
     <Dialog
       size="xs"
@@ -38,14 +39,26 @@ const CreateCinema = () => {
           <Typography className="-mb-2 text-red-400" variant="h6">
             Name
           </Typography>
-          <Input label="Name" size="lg" />
+          <Input
+            label="Name"
+            size="lg"
+            name="name"
+            value={createCinema.name}
+            onChange={handleCreate}
+          />
           <Typography className="-mb-2 text-red-400" variant="h6">
             Location
           </Typography>
-          <Input label="Location" size="lg" />
+          <Input
+            label="Location"
+            size="lg"
+            name="location"
+            value={createCinema.location}
+            onChange={handleCreate}
+          />
         </CardBody>
         <CardFooter className="pt-0">
-          <Button variant="gradient" onClick={handleClick} fullWidth>
+          <Button variant="gradient" fullWidth onClick={handleSave}>
             Create
           </Button>
         </CardFooter>

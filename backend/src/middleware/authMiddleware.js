@@ -2,10 +2,12 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userSchema.js";
 export const authMiddleware = async (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req.headers.authorization;
+
   if (token) {
     try {
-      const decoded = jwt.verify(token, process.env.secret_key);
+      const sliceToken = token.slice(7);
+      const decoded = jwt.verify(sliceToken, process.env.secret_key);
       req.user = await User.findById(decoded.userId).select("-password");
       next();
     } catch (error) {
