@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import Axios from "../Api/Apiconfig";
 
 const getMovies = async () => {
@@ -6,11 +6,22 @@ const getMovies = async () => {
   return data;
 };
 
+const postMovies = async (moviesData) => {
+  const res = await Axios.post("/movies", moviesData);
+  return res.data;
+};
 const UseFetchMovies = () => {
-  return useQuery({
+  const { isLoading, error, isError, data } = useQuery({
     queryKey: ["movies"],
     queryFn: getMovies,
   });
+  const mutation = useMutation({
+    mutationKey: ["movies"],
+    mutationFn: (moviesData) => {
+      return postMovies(moviesData);
+    },
+  });
+  return { isLoading, error, isError, data, mutation };
 };
 
 export default UseFetchMovies;

@@ -10,8 +10,11 @@ const Dashboard = () => {
   };
   return (
     <div className="flex">
-      <Sidebar />
-      <div className="flex flex-col">
+      <div className=" w-[250px] fixed -top-4">
+        <Sidebar />
+      </div>
+
+      <div className="flex flex-col w-[calc(100% - 250px)] ml-[250px]">
         <Navbar handleBtn={handleBtn} />
         <div className="w-[100%] h-[100%]">
           <Outlet />

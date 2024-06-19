@@ -21,7 +21,7 @@ const Navbar = ({ handleBtn }) => {
     }
   });
   return (
-    <div className="w-[80vw] bg-black h-[100px]">
+    <div className="w-[82vw] bg-black h-[100px]">
       <div className="flex justify-between items-center w-[100%] py-2 px-8">
         <IoMenuSharp className="text-white" size={30} onClick={handleBtn} />
         <div>

@@ -13,7 +13,8 @@ import { RxCross2 } from "react-icons/rx";
 import { MovieContext } from "../../context/MovieContext";
 
 const CreateMovie = () => {
-  const { isClose, handleClose } = useContext(MovieContext);
+  const { isClose, handleClose, postMovies, movieChange, movieSave } =
+    useContext(MovieContext);
   return (
     <Dialog
       size="xs"
@@ -38,22 +39,47 @@ const CreateMovie = () => {
           <Typography className="-mb-2 text-red-400" variant="h6">
             Title
           </Typography>
-          <Input label="Title" size="lg" />
+          <Input
+            label="Title"
+            size="lg"
+            value={postMovies.title}
+            name="title"
+            onChange={movieChange}
+          />
           <Typography className="-mb-2 text-red-400" variant="h6">
             Date
           </Typography>
-          <Input label="Date" size="lg" type="date" />
+          <Input
+            label="Date"
+            size="lg"
+            type="date"
+            value={postMovies.date}
+            name="date"
+            onChange={movieChange}
+          />
           <Typography className="-mb-2 text-red-400" variant="h6">
             Duration
           </Typography>
-          <Input label="hh:mm:ss" size="lg" />
+          <Input
+            label="hh:mm:ss"
+            size="lg"
+            value={postMovies.duration}
+            name="duration"
+            onChange={movieChange}
+          />
           <Typography className="-mb-2 text-red-400" variant="h6">
             Photo
           </Typography>
-          <Input label="Photo URL" size="lg" />
+          <Input
+            label="Photo URL"
+            size="lg"
+            value={postMovies.photo}
+            name="photo"
+            onChange={movieChange}
+          />
         </CardBody>
         <CardFooter className="pt-0">
-          <Button variant="gradient" onClick={handleClose} fullWidth>
+          <Button variant="gradient" onClick={movieSave} fullWidth>
             Save
           </Button>
         </CardFooter>

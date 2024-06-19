@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { MovieContext } from "../../context/MovieContext";
 
 const Movie = () => {
-  const { isFetching, isError, handleClose, error, movies } =
+  const { isLoading, isError, handleClose, error, movies } =
     useContext(MovieContext);
   return (
     <div className="h-[100%]">
@@ -21,8 +21,10 @@ const Movie = () => {
         <CreateMovie />
       </div>
       <hr />
-      {isFetching ? (
-        <Spinner />
+      {isLoading ? (
+        <div className="flex items-center justify-center mt-8">
+          <Spinner />
+        </div>
       ) : (
         <div className="grid grid-cols-4 m-4 gap-4">
           {movies &&

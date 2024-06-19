@@ -1,4 +1,4 @@
-import { Button } from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
 import CustomerTable from "./CustomerTable";
 import { useState } from "react";
 import CreateCustomer from "./CreateCustomer";
@@ -9,10 +9,10 @@ const Customer = () => {
   const handleCreate = () => {
     setCreate(!create);
   };
-  const { data: customers } = UseFetchCustomer();
-  console.log(customers);
+  const { isLoading, isError, error } = UseFetchCustomer();
+
   return (
-    <div className="h-[100%]">
+    <div className="h-[100%] w-[100%]">
       <div className="flex justify-between items-center m-4">
         <input
           type="text"
@@ -25,7 +25,19 @@ const Customer = () => {
         <CreateCustomer create={create} handleCreate={handleCreate} />
       </div>
       <hr />
-      <CustomerTable />
+      {isLoading ? (
+        <div className="flex items-center justify-center mt-8">
+          <Spinner />
+        </div>
+      ) : (
+        <CustomerTable />
+      )}
+
+      {isError && (
+        <div>
+          <h2>{error}</h2>
+        </div>
+      )}
     </div>
   );
 };

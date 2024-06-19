@@ -28,9 +28,13 @@ const CinemaContextProvider = ({ children }) => {
     data: cinemas,
     mutation,
   } = UseFetchCinema();
+
   const handleSave = (e) => {
     e.preventDefault();
     mutation.mutate(createCinema);
+    setCreateCinema("");
+    setOpen(!open);
+    window.location.reload();
   };
 
   return (

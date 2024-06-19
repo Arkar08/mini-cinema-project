@@ -6,13 +6,49 @@ export const MovieContext = createContext();
 
 const MovieContextProvider = ({ children }) => {
   const [isClose, setIsClose] = useState(false);
-  const { isFetching, error, data: movies, isError } = UseFetchMovies();
+  const [postMovies, setPostMovies] = useState({
+    title: "",
+    date: "",
+    duration: "",
+    photo: "",
+  });
+  const {
+    isLoading,
+    error,
+    data: movies,
+    isError,
+    mutation,
+  } = UseFetchMovies();
   const handleClose = () => {
     setIsClose(!isClose);
   };
+
+  const movieChange = (e) => {
+    const { name, value } = e.target;
+    setPostMovies((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const movieSave = (e) => {
+    e.preventDefault();
+    mutation.mutate(postMovies);
+  };
   return (
     <MovieContext.Provider
-      value={{ isFetching, error, movies, isError, handleClose, isClose }}
+      value={{
+        isLoading,
+        error,
+        movies,
+        isError,
+        handleClose,
+        isClose,
+        postMovies,
+        movieChange,
+        movieSave,
+      }}
     >
       {children}
     </MovieContext.Provider>

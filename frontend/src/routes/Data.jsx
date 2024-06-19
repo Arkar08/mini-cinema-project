@@ -18,73 +18,71 @@ import CinemaUser from "../pages/UserView/CinemaUser.jsx";
 const getPermission = () => {
   return localStorage.getItem("isAdmin") === "true";
 };
+
 const routes = [
-  {
-    path: "/",
-    element: getPermission() ? (
-      <ProvideRoute>
-        <Dashboard />
-      </ProvideRoute>
-    ) : (
-      <ProvideRoute>
-        <User />
-      </ProvideRoute>
-    ),
-    errorElement: <NotFound />,
-    children: [
-      {
-        index: true,
-        Component: Home,
+  getPermission()
+    ? {
+        path: "/",
+        element: (
+          <ProvideRoute>
+            <Dashboard />
+          </ProvideRoute>
+        ),
+        errorElement: <NotFound />,
+        children: [
+          {
+            index: true,
+            Component: Home,
+          },
+          {
+            path: "admin/customer",
+            Component: Customer,
+          },
+          {
+            path: "admin/cinema",
+            Component: Cinema,
+          },
+          {
+            path: "admin/movie",
+            Component: Movie,
+          },
+          {
+            path: "admin/room",
+            Component: Room,
+          },
+          {
+            path: "admin/seat",
+            Component: Seat,
+          },
+          {
+            path: "admin/price",
+            Component: SeatPrice,
+          },
+          {
+            path: "admin/booking",
+            Component: Booking,
+          },
+        ],
+      }
+    : {
+        path: "/",
+        element: (
+          <ProvideRoute>
+            <User />
+          </ProvideRoute>
+        ),
+        errorElement: <NotFound />,
+        children: [
+          {
+            index: true,
+            Component: HomeUser,
+          },
+          {
+            path: "user/cinema",
+            Component: CinemaUser,
+          },
+        ],
       },
-      {
-        path: "admin/customer",
-        Component: Customer,
-      },
-      {
-        path: "admin/cinema",
-        Component: Cinema,
-      },
-      {
-        path: "admin/movie",
-        Component: Movie,
-      },
-      {
-        path: "admin/room",
-        Component: Room,
-      },
-      {
-        path: "admin/seat",
-        Component: Seat,
-      },
-      {
-        path: "admin/price",
-        Component: SeatPrice,
-      },
-      {
-        path: "admin/booking",
-        Component: Booking,
-      },
-    ],
-  },
-  {
-    path: "/",
-    element: getPermission() ? (
-      <ProvideRoute>
-        <User />
-      </ProvideRoute>
-    ) : null,
-    errorElement: <NotFound />,
-    children: [
-      {
-        index: true,
-        Component: HomeUser,
-      },
-      {
-        path: "user/cinema",
-        Component: CinemaUser,
-      },
-    ],
-  },
   {
     path: "/login",
     Component: Login,

@@ -12,7 +12,7 @@ const Card = ({ c }) => {
         alt="cinema_image"
         className="w-[100%] h-[80%] p-2 rounded-lg object-cover object-center"
       />
-      <h2 className="text-xl px-2">{c.name}</h2>
+      <h2 className="text-xl px-2 uppercase">{c.name}</h2>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { CinemaContext } from "../../context/CinemaContext";
 
 const Cinema = () => {
-  const { cinemas, handleClick, isFetching, isError, error } =
+  const { cinemas, handleClick, isLoading, isError, error } =
     useContext(CinemaContext);
   return (
     <div className="h-[100%]">
@@ -21,7 +21,7 @@ const Cinema = () => {
         <CreateCinema />
       </div>
       <hr />
-      {isFetching ? (
+      {isLoading ? (
         <div className="flex items-center justify-center">
           <Spinner />
         </div>

@@ -17,7 +17,7 @@ const postCinema = async (userData) => {
 };
 
 const UseFetchCinema = () => {
-  const { isFetching, isError, data, error } = useQuery({
+  const { isLoading, isError, data, error } = useQuery({
     queryKey: ["cinemas"],
     queryFn: getCinema,
   });
@@ -27,7 +27,7 @@ const UseFetchCinema = () => {
       return postCinema(userData);
     },
   });
-  return { isFetching, isError, data, error, mutation };
+  return { isLoading, isError, data, error, mutation };
 };
 
 export default UseFetchCinema;

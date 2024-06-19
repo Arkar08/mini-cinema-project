@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="w-[372px] bg-black h-[100vh]">
+    <div className="w-[100%] bg-black h-[100vh]">
       <Link to="/">
         <div className="flex justify-center items-center mt-4">
-          <h1 className="p-2 text-xl text-red-600 uppercase font-bold">
+          <h1 className=" p-2 text-xl text-red-600 uppercase font-bold">
             Sein Movie Theatre
           </h1>
           <img

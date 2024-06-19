@@ -2,10 +2,14 @@
 const MovieCard = ({ m }) => {
   return (
     <div className="border h-[250px]  rounded-lg">
-      <img src="" alt="movie_img" className="w-[50%] h-[50%] mx-auto p-2" />
+      <img
+        src={m.photo}
+        alt="movie_img"
+        className="w-[150px] h-[150px] mx-auto p-2"
+      />
       <div className="flex justify-between items-center px-2">
         <label>Title-</label>
-        <h1 className="text-xl text-red-500">{m.title}</h1>
+        <h1 className="text-xl text-red-500 uppercase">{m.title}</h1>
       </div>
       <div className="flex justify-between items-center px-2">
         <label>Duration-</label>
