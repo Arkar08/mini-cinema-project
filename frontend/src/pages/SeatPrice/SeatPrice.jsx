@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { PriceContext } from "../../context/PriceContext";
 
 const SeatPrice = () => {
-  const { handleActive, error, isError, isFetching } = useContext(PriceContext);
+  const { handleActive, error, isError, isLoading } = useContext(PriceContext);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -20,7 +20,7 @@ const SeatPrice = () => {
         <CreatePrice />
       </div>
       <hr />
-      {isFetching ? (
+      {isLoading ? (
         <div className="flex justify-center items-center">
           <Spinner />
         </div>

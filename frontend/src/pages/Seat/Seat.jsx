@@ -5,8 +5,7 @@ import { useContext } from "react";
 import { SeatContext } from "../../context/SeatContext";
 
 const Seat = () => {
-  const { handleSeat, isFetching, isError, error, seats } =
-    useContext(SeatContext);
+  const { handleSeat, isLoading, isError, error } = useContext(SeatContext);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -21,17 +20,12 @@ const Seat = () => {
         <CreateSeat />
       </div>
       <hr />
-      {isFetching ? (
-        <div className="flex items-center justify-center">
+      {isLoading ? (
+        <div className="flex justify-center items-center">
           <Spinner />
         </div>
       ) : (
-        <div className="grid grid-cols-5 gap-4 px-8 mt-2">
-          {seats &&
-            seats.map((s) => {
-              return <CardSeat key={s._id} s={s} />;
-            })}
-        </div>
+        <CardSeat />
       )}
       {isError && (
         <div>

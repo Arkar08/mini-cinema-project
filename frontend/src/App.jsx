@@ -1,5 +1,6 @@
 import BookingContextProvider from "./context/BookingContext";
 import CinemaContextProvider from "./context/CinemaContext";
+import CustomerContextProvider from "./context/CustomerContext";
 import LoginContextProvider from "./context/LoginContext";
 import MovieContextProvider from "./context/MovieContext";
 import PriceContextProvider from "./context/PriceContext";
@@ -18,7 +19,9 @@ const App = () => {
               <PriceContextProvider>
                 <BookingContextProvider>
                   <MovieContextProvider>
-                    <Role />
+                    <CustomerContextProvider>
+                      <Role />
+                    </CustomerContextProvider>
                   </MovieContextProvider>
                 </BookingContextProvider>
               </PriceContextProvider>

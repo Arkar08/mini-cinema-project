@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
+import { useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import UseFetchCustomer from "../../hooks/UseFetchCustomer";
+import { CustomerContext } from "../../context/CustomerContext";
+
 const CustomerTable = () => {
-  const { data: customers } = UseFetchCustomer();
+  const { customers, getStateName, getTownshipName } =
+    useContext(CustomerContext);
   return (
     <table className="w-[90%] border-collapse border  mt-4 mx-auto">
       <thead>
@@ -25,8 +28,8 @@ const CustomerTable = () => {
                 <td className="p-2">{c.fullName}</td>
                 <td className="p-2">{c.email}</td>
                 <td className="p-2">{c.dateOfBirth}</td>
-                <td className="p-2">{c.stateCode}</td>
-                <td className="p-2">{c.townshipCode}</td>
+                <td className="p-2">{getStateName(c.stateCode)}</td>
+                <td className="p-2">{getTownshipName(c.townshipCode)}</td>
                 <td className="flex p-2 items-center justify-center">
                   <FaEdit
                     size={18}

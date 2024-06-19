@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { PriceContext } from "../../context/PriceContext";
+import { SeatContext } from "../../context/SeatContext";
 const PriceTable = () => {
-  const { price } = useContext(PriceContext);
+  const { price, getSeatName } = useContext(PriceContext);
+  const { getRoomName } = useContext(SeatContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
       <thead>
-        <tr className="text-center p-8 border bg-red-500 text-white">
+        <tr className="text-center p-4 border bg-red-500 text-white">
           <th>Id</th>
           <th>RoomName</th>
           <th>RowName</th>
@@ -20,9 +22,9 @@ const PriceTable = () => {
           price.map((p) => {
             return (
               <tr className="text-center  border text-red-500" key={p._id}>
-                <td className="p-2">100</td>
-                <td className="p-2">I</td>
-                <td className="p-2">A</td>
+                <td className="p-2">{p._id}</td>
+                <td className="p-2">{getRoomName(p.roomId)}</td>
+                <td className="p-2">{getSeatName(p.seatId)}</td>
                 <td className="p-2 text-green-500">Single</td>
                 <td className="p-2 text-right">{p.price} Ks</td>
                 <td className="flex p-2 items-center justify-center">

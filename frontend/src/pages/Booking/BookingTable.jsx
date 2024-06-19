@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { BookingContext } from "../../context/BookingContext";
+import { RoomContext } from "../../context/RoomContext";
 
 /* eslint-disable react/prop-types */
 const BookingTable = () => {
   const { bookings } = useContext(BookingContext);
+  const { getCinemaName } = useContext(RoomContext);
   return (
     <table className="w-[95%] border-collapse border  mt-4 mx-auto">
       <thead>
@@ -13,6 +15,7 @@ const BookingTable = () => {
           <th>MovieName</th>
           <th>RoomName</th>
           <th>ShowingDate</th>
+          <th>Showing Time</th>
           <th>SeatNo</th>
           <th>SeatPrice</th>
           <th>Action</th>
@@ -24,10 +27,11 @@ const BookingTable = () => {
             return (
               <tr className="text-center  text-red-500" key={b._id}>
                 <td className="p-2">{b._id}</td>
-                <td className=" p-2">Nay Pyi Taw</td>
-                <td className=" p-2">Thor</td>
-                <td className=" p-2">cinema IV</td>
+                <td className=" p-2 uppercase">{getCinemaName(b.cinemaId)}</td>
+                {/* <td className=" p-2">{getMovieName(b.movieId)}</td> */}
+                <td className=" p-2">II</td>
                 <td className=" p-2">27.12.2022</td>
+                <td className=" p-2">3:00</td>
                 <td className=" p-2">A3</td>
                 <td className=" p-2 text-right">5000 Ks</td>
                 <td className=" p-2">

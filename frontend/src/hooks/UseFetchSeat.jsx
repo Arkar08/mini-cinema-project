@@ -7,10 +7,11 @@ const getSeat = async () => {
 };
 
 const UseFetchSeat = () => {
-  return useQuery({
+  const { isLoading, isError, error, data } = useQuery({
     queryKey: ["seats"],
     queryFn: getSeat,
   });
+  return { isLoading, isError, error, data };
 };
 
 export default UseFetchSeat;

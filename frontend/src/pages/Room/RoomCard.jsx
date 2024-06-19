@@ -1,27 +1,44 @@
-/* eslint-disable react/prop-types */
-import room from "../../Data/room.avif";
-const RoomCard = ({ r }) => {
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { useContext } from "react";
+import { RoomContext } from "../../context/RoomContext";
+
+const RoomCard = () => {
+  const { rooms, getCinemaName } = useContext(RoomContext);
   return (
-    <div className="border cursor-pointer text-center rounded-md bg-black text-red-600 h-[230px]">
-      <div className="flex justify-center items-center flex-col p-2">
-        <img
-          src={room}
-          alt="room"
-          className="w-[200px] h-[100px] object-cover object-center"
-        />
-        <div className="flex items-center justify-center mt-2">
-          <label className="text-white px-2">RoomNo:</label>
-          <h2 className="text-xl">{r.roomNo}</h2>
-        </div>
-        <div className="flex items-center justify-center">
-          <label className="text-white px-2">RoomName:</label>
-          <h2 className="text-xl">{r.roomName}</h2>
-        </div>
-        <div className="flex items-center justify-center">
-          <h2 className="text-xl px-1">Mingalar</h2>
-        </div>
-      </div>
-    </div>
+    <table className="border-collapse w-[95%] border mt-4 mx-auto">
+      <thead>
+        <tr className="text-center p-8 border bg-red-500 text-white">
+          <th>Id</th>
+          <th>CinemaName</th>
+          <th>RoomNo</th>
+          <th>RoomName</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rooms &&
+          rooms.map((r) => {
+            return (
+              <tr className="text-center  border text-red-500" key={r._id}>
+                <td className="p-2">{r._id}</td>
+                <td className="p-2 uppercase">{getCinemaName(r.cinemaId)}</td>
+                <td className="p-2">{r.roomNo}</td>
+                <td className="p-2 text-green-500">{r.roomName}</td>
+                <td className="flex p-2 items-center justify-center">
+                  <FaEdit
+                    size={18}
+                    className="mx-1 text-blue-600 cursor-pointer"
+                  />
+                  <FaTrash
+                    size={18}
+                    className="cursor-pointer mx-1 text-red-600"
+                  />
+                </td>
+              </tr>
+            );
+          })}
+      </tbody>
+    </table>
   );
 };
 

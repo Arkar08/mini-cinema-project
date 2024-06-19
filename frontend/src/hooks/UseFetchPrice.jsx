@@ -7,10 +7,11 @@ const getPrice = async () => {
 };
 
 const UseFetchPrice = () => {
-  return useQuery({
+  const { isLoading, isError, error, data } = useQuery({
     queryKey: ["price"],
     queryFn: getPrice,
   });
+  return { isLoading, isError, error, data };
 };
 
 export default UseFetchPrice;

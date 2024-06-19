@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { BookingContext } from "../../context/BookingContext";
 
 const Booking = () => {
-  const { isFetching, isError, error } = useContext(BookingContext);
+  const { isLoading, isError, error } = useContext(BookingContext);
   return (
     <div className="h-[100%]">
       <div className="flex justify-between items-center m-4">
@@ -16,7 +16,7 @@ const Booking = () => {
         />
       </div>
       <hr />
-      {isFetching ? <Spinner /> : <BookingTable />}
+      {isLoading ? <Spinner /> : <BookingTable />}
       {isError && <div>{error}</div>}
     </div>
   );
