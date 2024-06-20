@@ -8,14 +8,19 @@ import {
   Typography,
   Input,
   Radio,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { SeatContext } from "../../context/SeatContext";
+import { RoomContext } from "../../context/RoomContext";
+import { dataRow, type } from "../../Data/data";
 
 const CreateSeat = () => {
   const { handleSeat, oneSeat } = useContext(SeatContext);
-  const type = ["single", "couple"];
+  const { rooms } = useContext(RoomContext);
+
   return (
     <Dialog
       size="xs"
@@ -37,18 +42,35 @@ const CreateSeat = () => {
             className="absolute top-2 right-2 cursor-pointer"
             onClick={handleSeat}
           />
-          <Typography className="-mb-2 text-red-400" variant="h6">
-            Room
-          </Typography>
-          <Input label="Room" size="lg" />
+          <div className="flex w-[100%] flex-col gap-6">
+            <Typography className="-mb-2 text-red-400" variant="h6">
+              Room
+            </Typography>
+            <Select size="md" label="Select RoomName">
+              {rooms
+                ?.sort((a, b) => {
+                  return a.roomName.localeCompare(b.roomName);
+                })
+                .map((c) => {
+                  return <Option key={c._id}>{c.roomName}</Option>;
+                })}
+            </Select>
+          </div>
+          <div className="flex w-[100%] flex-col gap-6">
+            <Typography className="-mb-2 text-red-400" variant="h6">
+              Row Name
+            </Typography>
+            <Select size="md" label="Select RowName">
+              {dataRow.map((d, index) => {
+                return <Option key={index}>{d}</Option>;
+              })}
+            </Select>
+          </div>
           <Typography className="-mb-2 text-red-400" variant="h6">
             Seat No
           </Typography>
           <Input label="SeatNo" size="lg" />
-          <Typography className="-mb-2 text-red-400" variant="h6">
-            Row Name
-          </Typography>
-          <Input label="RowName" size="lg" />
+
           <Typography className="-mb-2 text-red-400" variant="h6">
             Seat Type
           </Typography>

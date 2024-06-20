@@ -61,7 +61,7 @@ const CreateMovie = () => {
             Duration
           </Typography>
           <Input
-            label="hh:mm:ss"
+            label="hh:mm"
             size="lg"
             value={postMovies.duration}
             name="duration"

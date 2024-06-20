@@ -9,7 +9,7 @@ export const CustomerContext = createContext();
 const CustomerContextProvider = ({ children }) => {
   const { isLoading, isError, error, customers } = UseFetchCustomer();
   const getStateName = (id) => {
-    const getState = data.find((d) => {
+    const getState = data?.find((d) => {
       return d.StateId === id;
     });
     if (getState) {
@@ -19,7 +19,7 @@ const CustomerContextProvider = ({ children }) => {
     }
   };
   const getTownshipName = (id) => {
-    const getTownship = township.find((t) => {
+    const getTownship = township?.find((t) => {
       return t.TownshipId === id;
     });
     if (getTownship) {

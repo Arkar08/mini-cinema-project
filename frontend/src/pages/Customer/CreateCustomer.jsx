@@ -48,10 +48,10 @@ const CreateCustomer = ({ create, handleCreate }) => {
             TownShip Name
           </Typography>
           <Input label="TownShip" size="md" />
-          <Typography className="-mb-4 text-red-400" variant="h6">
-            Phone Number
+          <Typography className="-mb-2 text-red-400" variant="h6">
+            Ph Number
           </Typography>
-          <Input label="Ph No" size="md" type="tel" />
+          <Input label="Ph no" size="lg" type="number" />
           <Typography className="-mb-4 text-red-400" variant="h6">
             Date Of Birth
           </Typography>

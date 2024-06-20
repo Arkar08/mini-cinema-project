@@ -8,7 +8,6 @@ export const RoomContext = createContext();
 const RoomContextProvider = ({ children }) => {
   const { isLoading, isError, error, data: rooms } = UseFetchRoom();
   const { cinemas } = useContext(CinemaContext);
-
   const getCinemaName = (id) => {
     const getCinema = cinemas.find((c) => {
       return c._id === id;

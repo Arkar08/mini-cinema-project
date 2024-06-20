@@ -14,7 +14,7 @@ const PriceContextProvider = ({ children }) => {
   const { isFetching, isError, error, data: price } = UseFetchPrice();
 
   const getSeatName = (id) => {
-    const getSeat = seats.find((s) => {
+    const getSeat = seats?.find((s) => {
       return s._id === id;
     });
     if (getSeat) {

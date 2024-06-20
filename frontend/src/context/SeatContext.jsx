@@ -14,7 +14,7 @@ const SeatContextProvider = ({ children }) => {
   const { isFetching, isError, error, data: seats } = UseFetchSeat();
 
   const getRoomName = (id) => {
-    const getRoom = rooms.find((c) => {
+    const getRoom = rooms?.find((c) => {
       return c._id === id;
     });
     if (getRoom) {

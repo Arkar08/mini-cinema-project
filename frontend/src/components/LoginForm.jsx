@@ -13,12 +13,12 @@ import { LoginContext } from "../context/LoginContext";
 const Login = () => {
   const { handleChange, handleSubmit, user, error } = useContext(LoginContext);
   return (
-    <Card color="transparent" shadow={false} className="border p-4 shadow-lg">
+    <Card color="transparent" shadow={false} className="border p-4 shadow-md">
       <Typography variant="h4" color="blue-gray">
         Login
       </Typography>
       {error && <div>{error.message}</div>}
-      <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+      <form className="mt-8 mb-2 w-40 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Your Email

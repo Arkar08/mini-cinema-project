@@ -2245,3 +2245,17 @@ export const township = [
     StateCode: "MMR013",
   },
 ];
+export const dataNo = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
+export const dataRow = ["A", "B", "C", "D", "E", "F", "G"];
+
+export const dataRoom = [
+  "Cinema I",
+  "Cinema II",
+  "Cinema III",
+  "Cinema IV",
+  "Cinema V",
+  "Cinema VI",
+];
+export const dataSeat = [];
+
+export const type = ["Single", "Couple"];
