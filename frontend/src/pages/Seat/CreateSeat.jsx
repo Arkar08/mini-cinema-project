@@ -6,7 +6,6 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Input,
   Radio,
   Select,
   Option,
@@ -14,12 +13,20 @@ import {
 import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { SeatContext } from "../../context/SeatContext";
-import { RoomContext } from "../../context/RoomContext";
-import { dataRow, type } from "../../Data/data";
+import { dataRow, dataSeatNo, type } from "../../Data/data";
 
 const CreateSeat = () => {
-  const { handleSeat, oneSeat } = useContext(SeatContext);
-  const { rooms } = useContext(RoomContext);
+  const {
+    handleSeat,
+    oneSeat,
+    newSeat,
+    handleRoom,
+    handleSeatNo,
+    handleSeatType,
+    handleRowName,
+    seatSave,
+    sortRoom,
+  } = useContext(SeatContext);
 
   return (
     <Dialog
@@ -44,45 +51,83 @@ const CreateSeat = () => {
           />
           <div className="flex w-[100%] flex-col gap-6">
             <Typography className="-mb-2 text-red-400" variant="h6">
-              Room
+              Seat No
             </Typography>
-            <Select size="md" label="Select RoomName">
-              {rooms
-                ?.sort((a, b) => {
-                  return a.roomName.localeCompare(b.roomName);
-                })
-                .map((c) => {
-                  return <Option key={c._id}>{c.roomName}</Option>;
-                })}
+            <Select
+              size="md"
+              label="Select RowName"
+              value={newSeat.seatNo}
+              onChange={handleSeatNo}
+            >
+              {dataSeatNo.map((d, index) => {
+                return (
+                  <Option key={index} value={d}>
+                    {d}
+                  </Option>
+                );
+              })}
             </Select>
           </div>
+
           <div className="flex w-[100%] flex-col gap-6">
             <Typography className="-mb-2 text-red-400" variant="h6">
               Row Name
             </Typography>
-            <Select size="md" label="Select RowName">
+            <Select
+              size="md"
+              label="Select RowName"
+              value={newSeat.rowName}
+              onChange={handleRowName}
+            >
               {dataRow.map((d, index) => {
-                return <Option key={index}>{d}</Option>;
+                return (
+                  <Option key={index} value={d}>
+                    {d}
+                  </Option>
+                );
               })}
             </Select>
           </div>
-          <Typography className="-mb-2 text-red-400" variant="h6">
-            Seat No
-          </Typography>
-          <Input label="SeatNo" size="lg" />
-
+          <div className="flex w-[100%] flex-col gap-6">
+            <Typography className="-mb-2 text-red-400" variant="h6">
+              Room
+            </Typography>
+            <Select
+              size="md"
+              label="Select RoomName"
+              value={newSeat.roomId}
+              onChange={handleRoom}
+            >
+              {sortRoom &&
+                sortRoom.map((c, index) => {
+                  return (
+                    <Option key={index} value={c._id}>
+                      {c.roomName}
+                    </Option>
+                  );
+                })}
+            </Select>
+          </div>
           <Typography className="-mb-2 text-red-400" variant="h6">
             Seat Type
           </Typography>
           <div className="flex">
             {type &&
               type.map((t, index) => {
-                return <Radio key={index} label={t} name="type" />;
+                return (
+                  <Radio
+                    key={index}
+                    label={t}
+                    name="type"
+                    value={t}
+                    onChange={(e) => handleSeatType(e.target.value)}
+                  />
+                );
               })}
           </div>
         </CardBody>
         <CardFooter className="pt-0">
-          <Button variant="gradient" onClick={handleSeat} fullWidth>
+          <Button variant="gradient" onClick={seatSave} fullWidth>
             Save
           </Button>
         </CardFooter>

@@ -11,9 +11,12 @@ const seatPriceSchema = new mongoose.Schema(
       ref: "Rooms",
       required: true,
     },
-    seatId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Seats",
+    rowName: {
+      type: String,
+      required: true,
+    },
+    seatNo: {
+      type: Number,
       required: true,
     },
   },

@@ -8,10 +8,22 @@ export const SeatContext = createContext();
 const SeatContextProvider = ({ children }) => {
   const [oneSeat, setOneSeat] = useState(false);
   const { rooms } = useContext(RoomContext);
+  const [newSeat, setNewSeat] = useState({
+    roomId: "",
+    seatNo: "",
+    rowName: "",
+    seatType: "",
+  });
   const handleSeat = () => {
     setOneSeat(!oneSeat);
   };
-  const { isFetching, isError, error, data: seats } = UseFetchSeat();
+  const {
+    isLoading,
+    isError,
+    error,
+    data: seats,
+    mutationsSeat,
+  } = UseFetchSeat();
 
   const getRoomName = (id) => {
     const getRoom = rooms?.find((c) => {
@@ -23,16 +35,51 @@ const SeatContextProvider = ({ children }) => {
       return "Unknown";
     }
   };
+  const sortRoom = rooms?.sort((a, b) => {
+    return a.roomName.localeCompare(b.roomName);
+  });
+  const handleRoom = (value) => {
+    setNewSeat((prev) => {
+      return { ...prev, roomId: value };
+    });
+  };
+  const handleSeatNo = (value) => {
+    setNewSeat((prev) => {
+      return { ...prev, seatNo: value };
+    });
+  };
+  const handleSeatType = (value) => {
+    setNewSeat((prev) => {
+      return { ...prev, seatType: value };
+    });
+  };
+  const handleRowName = (value) => {
+    setNewSeat((prev) => {
+      return { ...prev, rowName: value };
+    });
+  };
+  const seatSave = () => {
+    mutationsSeat.mutate(newSeat);
+    setOneSeat(!oneSeat);
+    window.location.reload();
+  };
   return (
     <SeatContext.Provider
       value={{
         handleSeat,
         oneSeat,
         seats,
-        isFetching,
+        isLoading,
         isError,
         error,
         getRoomName,
+        handleRoom,
+        newSeat,
+        handleSeatNo,
+        handleSeatType,
+        handleRowName,
+        seatSave,
+        sortRoom,
       }}
     >
       {children}

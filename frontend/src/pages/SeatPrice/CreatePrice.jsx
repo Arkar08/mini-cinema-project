@@ -13,12 +13,20 @@ import {
 import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { PriceContext } from "../../context/PriceContext";
-import { RoomContext } from "../../context/RoomContext";
 import { dataRow, dataSeatNo } from "../../Data/data";
 
 const CreatePrice = () => {
-  const { active, handleActive } = useContext(PriceContext);
-  const { rooms } = useContext(RoomContext);
+  const {
+    active,
+    handleActive,
+    newPrice,
+    postRoom,
+    sortData,
+    postPrice,
+    handleSeatNo,
+    handleSeatRow,
+    savePrice,
+  } = useContext(PriceContext);
   return (
     <Dialog
       size="xs"
@@ -44,23 +52,37 @@ const CreatePrice = () => {
             <Typography className="-mb-2 text-red-400" variant="h6">
               Room
             </Typography>
-            <Select size="md" label="Select RoomName">
-              {rooms
-                ?.sort((a, b) => {
-                  return a.roomName.localeCompare(b.roomName);
-                })
-                .map((c) => {
-                  return <Option key={c._id}>{c.roomName}</Option>;
-                })}
+            <Select
+              size="md"
+              label="Select RoomName"
+              value={newPrice.roomId}
+              onChange={postRoom}
+            >
+              {sortData?.map((c) => {
+                return (
+                  <Option key={c._id} value={c._id}>
+                    {c.roomName}
+                  </Option>
+                );
+              })}
             </Select>
           </div>
           <div className="flex w-[100%] flex-col gap-6">
             <Typography className="-mb-2 text-red-400" variant="h6">
               Row Name
             </Typography>
-            <Select size="md" label="Select RowName">
+            <Select
+              size="md"
+              label="Select RowName"
+              value={newPrice.rowName}
+              onChange={handleSeatRow}
+            >
               {dataRow.map((d, index) => {
-                return <Option key={index}>{d}</Option>;
+                return (
+                  <Option key={index} value={d}>
+                    {d}
+                  </Option>
+                );
               })}
             </Select>
           </div>
@@ -68,19 +90,35 @@ const CreatePrice = () => {
             <Typography className="-mb-2 text-red-400" variant="h6">
               Seat No
             </Typography>
-            <Select size="md" label="Select SeatNo">
+            <Select
+              size="md"
+              label="Select SeatNo"
+              value={newPrice.seatNo}
+              onChange={handleSeatNo}
+            >
               {dataSeatNo.map((d, index) => {
-                return <Option key={index}>{d}</Option>;
+                return (
+                  <Option key={index} value={d}>
+                    {d}
+                  </Option>
+                );
               })}
             </Select>
           </div>
           <Typography className="-mb-2 text-red-400" variant="h6">
             Price
           </Typography>
-          <Input label="Price" size="lg" defaultValue={0} type="number" />
+          <Input
+            label="Price"
+            size="lg"
+            defaultValue={0}
+            type="number"
+            value={newPrice.price}
+            onChange={postPrice}
+          />
         </CardBody>
         <CardFooter className="pt-0">
-          <Button variant="gradient" onClick={handleActive} fullWidth>
+          <Button variant="gradient" onClick={savePrice} fullWidth>
             Save
           </Button>
         </CardFooter>

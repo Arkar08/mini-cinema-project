@@ -6,10 +6,10 @@ import { CinemaContext } from "./CinemaContext";
 export const RoomContext = createContext();
 
 const RoomContextProvider = ({ children }) => {
-  const { isLoading, isError, error, data: rooms } = UseFetchRoom();
+  const { isLoading, isError, error, data: rooms, mutations } = UseFetchRoom();
   const [newRoom, setNewRoom] = useState({
     roomName: "",
-    cinemaName: "",
+    cinemaId: "",
     roomNo: "",
   });
   const { cinemas } = useContext(CinemaContext);
@@ -26,7 +26,9 @@ const RoomContextProvider = ({ children }) => {
   };
 
   const handleRoomSave = () => {
-    console.log(newRoom);
+    mutations.mutate(newRoom);
+    setIsopen(!isopen);
+    window.location.reload();
   };
   const [isopen, setIsopen] = useState(false);
   const handleOpen = () => {
@@ -37,7 +39,23 @@ const RoomContextProvider = ({ children }) => {
       return { ...prev, roomName: value };
     });
   };
-
+  const handleCinemaId = (name) => {
+    if (name) {
+      setNewRoom((prev) => {
+        return { ...prev, cinemaId: name };
+      });
+    } else {
+      return "Unknown";
+    }
+  };
+  const handleRoomNo = (no) => {
+    setNewRoom((prev) => {
+      return { ...prev, roomNo: no };
+    });
+  };
+  const sortCinema = cinemas?.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
   return (
     <RoomContext.Provider
       value={{
@@ -51,6 +69,9 @@ const RoomContextProvider = ({ children }) => {
         newRoom,
         handleRoomSave,
         handleRoomChange,
+        handleCinemaId,
+        handleRoomNo,
+        sortCinema,
       }}
     >
       {children}

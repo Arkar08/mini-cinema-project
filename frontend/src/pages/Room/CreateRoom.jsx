@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
   Button,
@@ -12,12 +13,18 @@ import {
 import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { RoomContext } from "../../context/RoomContext";
-import { CinemaContext } from "../../context/CinemaContext";
 import { dataRoom, dataNo } from "../../Data/data";
 const CreateRoom = () => {
-  const { isopen, handleOpen, handleRoomChange, newRoom, handleRoomSave } =
-    useContext(RoomContext);
-  const { cinemas } = useContext(CinemaContext);
+  const {
+    isopen,
+    handleOpen,
+    handleRoomChange,
+    sortCinema,
+    newRoom,
+    handleRoomSave,
+    handleCinemaId,
+    handleRoomNo,
+  } = useContext(RoomContext);
   return (
     <Dialog
       size="xs"
@@ -58,7 +65,6 @@ const CreateRoom = () => {
               })}
             </Select>
           </div>
-
           <div className="flex w-[100%] flex-col gap-6">
             <Typography className="-mb-2 text-red-400" variant="h6">
               Cinema Name
@@ -66,14 +72,11 @@ const CreateRoom = () => {
             <Select
               size="md"
               label="Choose Cinema"
-              value={newRoom.cinemaName}
-              onChange={handleRoomChange}
+              value={newRoom.cinemaId}
+              onChange={handleCinemaId}
             >
-              {cinemas
-                ?.sort((a, b) => {
-                  return a.name.localeCompare(b.name);
-                })
-                .map((c) => {
+              {sortCinema &&
+                sortCinema.map((c) => {
                   return (
                     <Option key={c._id} value={c._id}>
                       {c.name}
@@ -89,7 +92,7 @@ const CreateRoom = () => {
             <Select
               label="Select Room No"
               value={newRoom.roomNo}
-              onChange={handleRoomChange}
+              onChange={handleRoomNo}
             >
               {dataNo.map((n, index) => {
                 return (

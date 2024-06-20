@@ -1,17 +1,12 @@
-import Seats from "../models/oneSeatSchema.js";
 import Rooms from "../models/roomSchema.js";
 import SeatPrice from "../models/seatPriceSchema.js";
 // post price
 export const postSeatPriceController = async (req, res) => {
-  const { price, roomId, seatId } = req.body;
-  if (!roomId || !price || !seatId) {
+  const { price, roomId, rowName, seatNo } = req.body;
+  if (!roomId || !price || !rowName || !seatNo) {
     return res.status(400).json("plz filled out in the fields");
   }
   try {
-    const seat = await Seats.findById({ _id: seatId });
-    if (!seat) {
-      return res.status(400).json("invalid seatId");
-    }
     const room = await Rooms.findById({ _id: roomId });
     if (!room) {
       return res.status(400).json("invalid roomId");
@@ -19,7 +14,8 @@ export const postSeatPriceController = async (req, res) => {
     const newPrice = new SeatPrice({
       price,
       roomId: room,
-      seatId: seat,
+      rowName,
+      seatNo,
     });
     await newPrice.save();
     return res.status(201).json(newPrice);

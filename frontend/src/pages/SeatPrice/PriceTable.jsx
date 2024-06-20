@@ -3,7 +3,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { PriceContext } from "../../context/PriceContext";
 import { SeatContext } from "../../context/SeatContext";
 const PriceTable = () => {
-  const { price, getSeatName } = useContext(PriceContext);
+  const { price, getType } = useContext(PriceContext);
   const { getRoomName } = useContext(SeatContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
@@ -24,8 +24,8 @@ const PriceTable = () => {
               <tr className="text-center  border text-red-500" key={p._id}>
                 <td className="p-2">{p._id}</td>
                 <td className="p-2">{getRoomName(p.roomId)}</td>
-                <td className="p-2">{getSeatName(p.seatId)}</td>
-                <td className="p-2 text-green-500">Single</td>
+                <td className="p-2">{p.rowName}</td>
+                <td className="p-2 text-green-500">{getType(p.rowName)}</td>
                 <td className="p-2 text-right">{p.price} Ks</td>
                 <td className="flex p-2 items-center justify-center">
                   <FaEdit

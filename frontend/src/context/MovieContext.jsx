@@ -32,9 +32,10 @@ const MovieContextProvider = ({ children }) => {
       };
     });
   };
-  const movieSave = (e) => {
-    e.preventDefault();
+  const movieSave = () => {
     mutation.mutate(postMovies);
+    setIsClose(!isClose);
+    window.location.reload();
   };
   return (
     <MovieContext.Provider

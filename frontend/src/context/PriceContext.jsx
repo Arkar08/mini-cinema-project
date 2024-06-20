@@ -2,26 +2,63 @@
 import { createContext, useContext, useState } from "react";
 import UseFetchPrice from "../hooks/UseFetchPrice";
 import { SeatContext } from "./SeatContext";
+import { RoomContext } from "./RoomContext";
 
 export const PriceContext = createContext();
 
 const PriceContextProvider = ({ children }) => {
   const [active, setActive] = useState(false);
   const { seats } = useContext(SeatContext);
+  const { rooms } = useContext(RoomContext);
+  const [newPrice, setNewPrice] = useState({
+    price: "",
+    roomId: "",
+    rowName: "",
+    seatNo: "",
+  });
   const handleActive = () => {
     setActive(!active);
   };
-  const { isFetching, isError, error, data: price } = UseFetchPrice();
+  const { isFetching, isError, error, data: price, mutation } = UseFetchPrice();
 
-  const getSeatName = (id) => {
-    const getSeat = seats?.find((s) => {
-      return s._id === id;
+  const postRoom = (value) => {
+    return setNewPrice((prev) => {
+      return { ...prev, roomId: value };
     });
-    if (getSeat) {
-      return getSeat.rowName;
+  };
+  const postPrice = (e) => {
+    return setNewPrice((prev) => {
+      return { ...prev, price: Number(e.target.value) };
+    });
+  };
+  const sortData = rooms?.sort((a, b) => {
+    return a.roomName.localeCompare(b.roomName);
+  });
+
+  const getType = (type) => {
+    const seatGet = seats?.find((s) => {
+      return s.rowName === type;
+    });
+    if (seatGet) {
+      return seatGet.seatType;
     } else {
-      return "Unknown";
+      return "Unknown SeatType";
     }
+  };
+  const handleSeatRow = (value) => {
+    setNewPrice((prev) => {
+      return { ...prev, rowName: value };
+    });
+  };
+  const handleSeatNo = (value) => {
+    setNewPrice((prev) => {
+      return { ...prev, seatNo: value };
+    });
+  };
+  const savePrice = () => {
+    mutation.mutate(newPrice);
+    setActive(!active);
+    window.location.reload();
   };
   return (
     <PriceContext.Provider
@@ -32,7 +69,14 @@ const PriceContextProvider = ({ children }) => {
         isFetching,
         isError,
         error,
-        getSeatName,
+        postRoom,
+        newPrice,
+        postPrice,
+        sortData,
+        handleSeatRow,
+        handleSeatNo,
+        savePrice,
+        getType,
       }}
     >
       {children}
