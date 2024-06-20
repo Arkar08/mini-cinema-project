@@ -14,7 +14,7 @@ import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { PriceContext } from "../../context/PriceContext";
 import { RoomContext } from "../../context/RoomContext";
-import { dataRow } from "../../Data/data";
+import { dataRow, dataSeatNo } from "../../Data/data";
 
 const CreatePrice = () => {
   const { active, handleActive } = useContext(PriceContext);
@@ -40,7 +40,7 @@ const CreatePrice = () => {
             className="absolute top-2 right-2 cursor-pointer"
             onClick={handleActive}
           />
-          <div className="flex w-[100%] flex-col gap-6">
+          <div className="flex w-[100%] flex-col gap-6 mt-6">
             <Typography className="-mb-2 text-red-400" variant="h6">
               Room
             </Typography>
@@ -68,12 +68,10 @@ const CreatePrice = () => {
             <Typography className="-mb-2 text-red-400" variant="h6">
               Seat No
             </Typography>
-            <Select size="md" label="Select Version">
-              <Option>Material Tailwind HTML</Option>
-              <Option>Material Tailwind React</Option>
-              <Option>Material Tailwind Vue</Option>
-              <Option>Material Tailwind Angular</Option>
-              <Option>Material Tailwind Svelte</Option>
+            <Select size="md" label="Select SeatNo">
+              {dataSeatNo.map((d, index) => {
+                return <Option key={index}>{d}</Option>;
+              })}
             </Select>
           </div>
           <Typography className="-mb-2 text-red-400" variant="h6">

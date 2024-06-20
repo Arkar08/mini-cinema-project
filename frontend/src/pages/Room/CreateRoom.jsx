@@ -15,7 +15,8 @@ import { RoomContext } from "../../context/RoomContext";
 import { CinemaContext } from "../../context/CinemaContext";
 import { dataRoom, dataNo } from "../../Data/data";
 const CreateRoom = () => {
-  const { isopen, handleOpen } = useContext(RoomContext);
+  const { isopen, handleOpen, handleRoomChange, newRoom, handleRoomSave } =
+    useContext(RoomContext);
   const { cinemas } = useContext(CinemaContext);
   return (
     <Dialog
@@ -42,9 +43,18 @@ const CreateRoom = () => {
             <Typography className="-mb-2 text-red-400" variant="h6">
               Name
             </Typography>
-            <Select size="md" label="Choose RoomName" name="cinema">
+            <Select
+              size="md"
+              label="Choose RoomName"
+              value={newRoom.roomName}
+              onChange={handleRoomChange}
+            >
               {dataRoom.map((d, index) => {
-                return <Option key={index}>{d}</Option>;
+                return (
+                  <Option key={index} value={d}>
+                    {d}
+                  </Option>
+                );
               })}
             </Select>
           </div>
@@ -53,13 +63,22 @@ const CreateRoom = () => {
             <Typography className="-mb-2 text-red-400" variant="h6">
               Cinema Name
             </Typography>
-            <Select size="md" label="Choose Cinema" name="cinema">
+            <Select
+              size="md"
+              label="Choose Cinema"
+              value={newRoom.cinemaName}
+              onChange={handleRoomChange}
+            >
               {cinemas
                 ?.sort((a, b) => {
                   return a.name.localeCompare(b.name);
                 })
                 .map((c) => {
-                  return <Option key={c._id}>{c.name}</Option>;
+                  return (
+                    <Option key={c._id} value={c._id}>
+                      {c.name}
+                    </Option>
+                  );
                 })}
             </Select>
           </div>
@@ -67,15 +86,27 @@ const CreateRoom = () => {
             <Typography className="-mb-2 text-red-400" variant="h6">
               Room No
             </Typography>
-            <Select label="Select Room No">
+            <Select
+              label="Select Room No"
+              value={newRoom.roomNo}
+              onChange={handleRoomChange}
+            >
               {dataNo.map((n, index) => {
-                return <Option key={index}>{n}</Option>;
+                return (
+                  <Option key={index} value={n}>
+                    {n}
+                  </Option>
+                );
               })}
             </Select>
           </div>
         </CardBody>
         <CardFooter className="pt-0 ">
-          <Button variant="gradient" onClick={handleOpen} className="w-[100%] ">
+          <Button
+            variant="gradient"
+            onClick={handleRoomSave}
+            className="w-[100%] "
+          >
             Create
           </Button>
         </CardFooter>

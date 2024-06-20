@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { CustomerContext } from "../../context/CustomerContext";
+import moment from "moment";
 
 const CustomerTable = () => {
   const { customers, getStateName, getTownshipName } =
@@ -16,6 +17,7 @@ const CustomerTable = () => {
           <th>DateOfBirth</th>
           <th>StateName</th>
           <th>TownshipName</th>
+          <th>Is Admin</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -27,9 +29,10 @@ const CustomerTable = () => {
                 <td className="p-2">{c._id}</td>
                 <td className="p-2">{c.fullName}</td>
                 <td className="p-2">{c.email}</td>
-                <td className="p-2">{c.dateOfBirth}</td>
+                <td className="p-2">{moment(c.dateOfBirth).format("L")}</td>
                 <td className="p-2">{getStateName(c.stateCode)}</td>
                 <td className="p-2">{getTownshipName(c.townshipCode)}</td>
+                <td className="p-2">{c.isAdmin === true ? "Admin" : "User"}</td>
                 <td className="flex p-2 items-center justify-center">
                   <FaEdit
                     size={18}
