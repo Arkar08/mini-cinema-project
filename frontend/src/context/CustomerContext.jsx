@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import UseFetchCustomer from "../hooks/UseFetchCustomer";
 import { data } from "../Data/data";
 import { township } from "../Data/data";
@@ -8,6 +8,11 @@ export const CustomerContext = createContext();
 
 const CustomerContextProvider = ({ children }) => {
   const { isLoading, isError, error, customers } = UseFetchCustomer();
+
+  const [create, setCreate] = useState(false);
+  const handleCreate = () => {
+    setCreate(!create);
+  };
   const getStateName = (id) => {
     const getState = data?.find((d) => {
       return d.StateId === id;
@@ -36,6 +41,8 @@ const CustomerContextProvider = ({ children }) => {
         isError,
         error,
         customers,
+        create,
+        handleCreate,
         getStateName,
         getTownshipName,
       }}

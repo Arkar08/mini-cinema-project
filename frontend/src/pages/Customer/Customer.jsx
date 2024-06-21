@@ -1,15 +1,12 @@
 import { Button, Spinner } from "@material-tailwind/react";
 import CustomerTable from "./CustomerTable";
-import { useState } from "react";
+import { useContext } from "react";
 import CreateCustomer from "./CreateCustomer";
-import UseFetchCustomer from "../../hooks/UseFetchCustomer";
+import { CustomerContext } from "../../context/CustomerContext";
 
 const Customer = () => {
-  const [create, setCreate] = useState(false);
-  const handleCreate = () => {
-    setCreate(!create);
-  };
-  const { isLoading, isError, error } = UseFetchCustomer();
+  const { handleCreate, isError, isLoading, error } =
+    useContext(CustomerContext);
 
   return (
     <div className="h-[100%] w-[100%]">
@@ -22,7 +19,7 @@ const Customer = () => {
         <Button className="text-red-500" onClick={handleCreate}>
           New{" "}
         </Button>
-        <CreateCustomer create={create} handleCreate={handleCreate} />
+        <CreateCustomer />
       </div>
       <hr />
       {isLoading ? (
