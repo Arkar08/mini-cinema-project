@@ -14,6 +14,7 @@ import ProvideRoute from "../layouts/ProvideRoute.jsx";
 import User from "../layouts/User.jsx";
 import HomeUser from "../pages/UserView/HomeUser.jsx";
 import CinemaUser from "../pages/UserView/CinemaUser.jsx";
+import EditCustomer from "../pages/Customer/EditCustomer.jsx";
 
 const getPermission = () => {
   return localStorage.getItem("isAdmin") === "true";
@@ -37,6 +38,10 @@ const routes = [
           {
             path: "admin/customer",
             Component: Customer,
+          },
+          {
+            path: "admin/customer/:customerId",
+            Component: EditCustomer,
           },
           {
             path: "admin/cinema",

@@ -4,22 +4,14 @@ import generateToken from "../utils/generateToken.js";
 
 //post user
 export const postUserController = async (req, res) => {
-  const {
-    fullName,
-    password,
-    email,
-    stateCode,
-    townshipCode,
-    phNumber,
-    dateOfBirth,
-  } = req.body;
+  const { fullName, password, email, stateCode, townshipCode, dateOfBirth } =
+    req.body;
 
   if (
     !fullName ||
     !password ||
     !stateCode ||
     !townshipCode ||
-    !phNumber ||
     !dateOfBirth ||
     !email
   ) {
@@ -42,7 +34,6 @@ export const postUserController = async (req, res) => {
       password: hashPassword,
       stateCode,
       townshipCode,
-      phNumber,
       dateOfBirth,
       email,
     });

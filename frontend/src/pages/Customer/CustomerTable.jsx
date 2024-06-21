@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { CustomerContext } from "../../context/CustomerContext";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const CustomerTable = () => {
   const { customers, getStateName, getTownshipName } =
@@ -34,10 +35,12 @@ const CustomerTable = () => {
                 <td className="p-2">{getTownshipName(c.townshipCode)}</td>
                 <td className="p-2">{c.isAdmin === true ? "Admin" : "User"}</td>
                 <td className="flex p-2 items-center justify-center">
-                  <FaEdit
-                    size={18}
-                    className="mx-1 text-blue-600 cursor-pointer"
-                  />
+                  <Link to={`/admin/customer/${c._id}`}>
+                    <FaEdit
+                      size={18}
+                      className="mx-1 text-blue-600 cursor-pointer"
+                    />
+                  </Link>
                   <FaTrash
                     size={18}
                     className="cursor-pointer mx-1 text-red-600"

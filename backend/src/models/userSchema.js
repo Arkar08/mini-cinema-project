@@ -16,14 +16,10 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     stateCode: {
-      type: Number,
-      required: true,
-    },
-    townshipCode: {
       type: String,
       required: true,
     },
-    phNumber: {
+    townshipCode: {
       type: String,
       required: true,
     },

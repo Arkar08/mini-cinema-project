@@ -1,9 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import Axios from "../Api/Apiconfig";
 const getUser = async () => {
   const res = await Axios.get("/users");
   return res.data;
+};
+
+const postUser = async (userData) => {
+  try {
+    const res = await Axios.post("/users/signup", userData);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
 
 const UseFetchCustomer = () => {
@@ -16,7 +25,13 @@ const UseFetchCustomer = () => {
     queryKey: ["users"],
     queryFn: getUser,
   });
-  return { isLoading, isError, error, customers };
+  const mutations = useMutation({
+    mutationKey: ["users"],
+    mutationFn: (userData) => {
+      return postUser(userData);
+    },
+  });
+  return { isLoading, isError, error, customers, mutations };
 };
 
 export default UseFetchCustomer;
