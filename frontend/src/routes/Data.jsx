@@ -15,6 +15,9 @@ import User from "../layouts/User.jsx";
 import HomeUser from "../pages/UserView/HomeUser.jsx";
 import CinemaUser from "../pages/UserView/CinemaUser.jsx";
 import EditCustomer from "../pages/Customer/EditCustomer.jsx";
+import EditRoom from "../pages/Room/EditRoom.jsx";
+import EditSeat from "../pages/Seat/EditSeat.jsx";
+import EditPrice from "../pages/SeatPrice/EditPrice.jsx";
 
 const getPermission = () => {
   return localStorage.getItem("isAdmin") === "true";
@@ -56,12 +59,24 @@ const routes = [
             Component: Room,
           },
           {
+            path: "admin/room/:roomId",
+            Component: EditRoom,
+          },
+          {
             path: "admin/seat",
             Component: Seat,
           },
           {
+            path: "admin/seat/:seatId",
+            Component: EditSeat,
+          },
+          {
             path: "admin/price",
             Component: SeatPrice,
+          },
+          {
+            path: "admin/price/:priceId",
+            Component: EditPrice,
           },
           {
             path: "admin/booking",

@@ -124,6 +124,7 @@ export const loginUserController = async (req, res) => {
       if (validatorPassword) {
         const token = await generateToken(res, validatorEmail._id);
         return res.status(200).json({
+          email: validatorEmail.email,
           isAdmin: validatorEmail.isAdmin,
           token,
         });

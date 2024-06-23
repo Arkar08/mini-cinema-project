@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { SeatContext } from "../../context/SeatContext";
+import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const CardSeat = () => {
-  const { seats, getRoomName } = useContext(SeatContext);
+  const { seats, getRoomName, handeldeleteSeat } = useContext(SeatContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
       <thead>
@@ -28,13 +29,16 @@ const CardSeat = () => {
                 <td className="p-2">{s.rowName}</td>
                 <td className="p-2 text-green-500">{s.seatType}</td>
                 <td className="flex p-2 items-center justify-center">
-                  <FaEdit
-                    size={18}
-                    className="mx-1 text-blue-600 cursor-pointer"
-                  />
+                  <Link to={`/admin/seat/${s._id}`}>
+                    <FaEdit
+                      size={18}
+                      className="mx-1 text-blue-600 cursor-pointer"
+                    />
+                  </Link>
                   <FaTrash
                     size={18}
                     className="cursor-pointer mx-1 text-red-600"
+                    onClick={() => handeldeleteSeat(s._id)}
                   />
                 </td>
               </tr>

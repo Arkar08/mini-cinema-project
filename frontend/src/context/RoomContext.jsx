@@ -6,7 +6,14 @@ import { CinemaContext } from "./CinemaContext";
 export const RoomContext = createContext();
 
 const RoomContextProvider = ({ children }) => {
-  const { isLoading, isError, error, data: rooms, mutations } = UseFetchRoom();
+  const {
+    isLoading,
+    isError,
+    error,
+    data: rooms,
+    mutations,
+    deleteId,
+  } = UseFetchRoom();
   const [newRoom, setNewRoom] = useState({
     roomName: "",
     cinemaId: "",
@@ -56,6 +63,14 @@ const RoomContextProvider = ({ children }) => {
   const sortCinema = cinemas?.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
+
+  const handleDeleteRoom = (id) => {
+    const confirm = window.confirm("Are you want to delete?");
+    if (confirm) {
+      deleteId.mutate(id);
+      window.location.reload();
+    }
+  };
   return (
     <RoomContext.Provider
       value={{
@@ -72,6 +87,7 @@ const RoomContextProvider = ({ children }) => {
         handleCinemaId,
         handleRoomNo,
         sortCinema,
+        handleDeleteRoom,
       }}
     >
       {children}

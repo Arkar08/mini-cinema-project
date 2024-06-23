@@ -14,7 +14,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CustomerContext } from "../../context/CustomerContext";
 const EditCustomer = () => {
-  const { filterTownship } = useContext(CustomerContext);
+  const { filterTownship, checkDisabled } = useContext(CustomerContext);
   return (
     <Card className="mx-auto w-[450px]">
       <CardBody className="flex flex-col gap-4 relative mt-8">
@@ -88,7 +88,11 @@ const EditCustomer = () => {
             <Typography className="mb-4 text-red-400" variant="h6">
               TownShip Name
             </Typography>
-            <Select size="md" label="Select TownshipName">
+            <Select
+              size="md"
+              label="Select TownshipName"
+              disabled={checkDisabled}
+            >
               {filterTownship
                 ?.sort((a, b) => {
                   return a.TownshipName.localeCompare(b.TownshipName);

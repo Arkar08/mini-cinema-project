@@ -11,7 +11,16 @@ const postSeat = async (seatData) => {
     const res = await Axios.post("/seats", seatData);
     return res.data;
   } catch (error) {
-    return error.message;
+    return error;
+  }
+};
+
+const deleteSeat = async (id) => {
+  try {
+    const res = await Axios.delete(`/seats/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -26,7 +35,13 @@ const UseFetchSeat = () => {
       return postSeat(seatData);
     },
   });
-  return { isLoading, isError, error, data, mutationsSeat };
+  const deleteId = useMutation({
+    mutationKey: ["seats"],
+    mutationFn: (id) => {
+      return deleteSeat(id);
+    },
+  });
+  return { isLoading, isError, error, data, mutationsSeat, deleteId };
 };
 
 export default UseFetchSeat;

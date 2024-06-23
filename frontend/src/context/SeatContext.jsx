@@ -23,6 +23,7 @@ const SeatContextProvider = ({ children }) => {
     error,
     data: seats,
     mutationsSeat,
+    deleteId,
   } = UseFetchSeat();
 
   const getRoomName = (id) => {
@@ -63,6 +64,13 @@ const SeatContextProvider = ({ children }) => {
     setOneSeat(!oneSeat);
     window.location.reload();
   };
+  const handeldeleteSeat = (id) => {
+    const confirm = window.confirm("Are you want to delete?");
+    if (confirm) {
+      deleteId.mutate(id);
+      window.location.reload();
+    }
+  };
   return (
     <SeatContext.Provider
       value={{
@@ -80,6 +88,7 @@ const SeatContextProvider = ({ children }) => {
         handleRowName,
         seatSave,
         sortRoom,
+        handeldeleteSeat,
       }}
     >
       {children}

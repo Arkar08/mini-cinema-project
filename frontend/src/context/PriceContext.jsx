@@ -19,7 +19,14 @@ const PriceContextProvider = ({ children }) => {
   const handleActive = () => {
     setActive(!active);
   };
-  const { isFetching, isError, error, data: price, mutation } = UseFetchPrice();
+  const {
+    isFetching,
+    isError,
+    error,
+    data: price,
+    mutation,
+    deleteId,
+  } = UseFetchPrice();
 
   const postRoom = (value) => {
     return setNewPrice((prev) => {
@@ -60,6 +67,14 @@ const PriceContextProvider = ({ children }) => {
     setActive(!active);
     window.location.reload();
   };
+
+  const handleDeletePrice = (id) => {
+    const confirm = window.confirm("Are you want to delete?");
+    if (confirm) {
+      deleteId.mutate(id);
+      window.location.reload();
+    }
+  };
   return (
     <PriceContext.Provider
       value={{
@@ -77,6 +92,7 @@ const PriceContextProvider = ({ children }) => {
         handleSeatNo,
         savePrice,
         getType,
+        handleDeletePrice,
       }}
     >
       {children}

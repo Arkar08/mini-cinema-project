@@ -6,7 +6,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 const CustomerTable = () => {
-  const { customers, getStateName, getTownshipName } =
+  const { customers, getStateName, getTownshipName, handleDelete } =
     useContext(CustomerContext);
   return (
     <table className="w-[90%] border-collapse border  mt-4 mx-auto">
@@ -44,6 +44,7 @@ const CustomerTable = () => {
                   <FaTrash
                     size={18}
                     className="cursor-pointer mx-1 text-red-600"
+                    onClick={() => handleDelete(c._id)}
                   />
                 </td>
               </tr>

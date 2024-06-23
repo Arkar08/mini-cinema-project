@@ -7,7 +7,7 @@ import { township } from "../Data/data";
 export const CustomerContext = createContext();
 
 const CustomerContextProvider = ({ children }) => {
-  const { isLoading, isError, error, customers, mutations } =
+  const { isLoading, isError, error, customers, mutations, deleteId } =
     UseFetchCustomer();
 
   const [newCustomer, setNewCustomer] = useState({
@@ -71,7 +71,13 @@ const CustomerContextProvider = ({ children }) => {
     setCreate(!create);
     window.location.reload();
   };
-
+  const handleDelete = (id) => {
+    const confirm = window.confirm("Are you want to delete?");
+    if (confirm) {
+      deleteId.mutate(id);
+      window.location.reload();
+    }
+  };
   return (
     <CustomerContext.Provider
       value={{
@@ -90,6 +96,7 @@ const CustomerContextProvider = ({ children }) => {
         filterTownship,
         handleTownship,
         checkDisabled,
+        handleDelete,
       }}
     >
       {children}

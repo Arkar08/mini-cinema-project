@@ -1,9 +1,9 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useContext } from "react";
 import { RoomContext } from "../../context/RoomContext";
-
+import { Link } from "react-router-dom";
 const RoomCard = () => {
-  const { rooms, getCinemaName } = useContext(RoomContext);
+  const { rooms, getCinemaName, handleDeleteRoom } = useContext(RoomContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
       <thead>
@@ -25,13 +25,19 @@ const RoomCard = () => {
                 <td className="p-2">{r.roomNo}</td>
                 <td className="p-2 text-green-500">{r.roomName}</td>
                 <td className="flex p-2 items-center justify-center">
-                  <FaEdit
-                    size={18}
-                    className="mx-1 text-blue-600 cursor-pointer"
-                  />
+                  <Link to={`/admin/room/${r._id}`}>
+                    {" "}
+                    <FaEdit
+                      size={18}
+                      className="mx-1 text-blue-600 cursor-pointer"
+                    />
+                  </Link>
                   <FaTrash
                     size={18}
                     className="cursor-pointer mx-1 text-red-600"
+                    onClick={() => {
+                      handleDeleteRoom(r._id);
+                    }}
                   />
                 </td>
               </tr>

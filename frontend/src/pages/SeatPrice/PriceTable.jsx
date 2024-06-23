@@ -2,8 +2,9 @@ import { useContext } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { PriceContext } from "../../context/PriceContext";
 import { SeatContext } from "../../context/SeatContext";
+import { Link } from "react-router-dom";
 const PriceTable = () => {
-  const { price, getType } = useContext(PriceContext);
+  const { price, getType, handleDeletePrice } = useContext(PriceContext);
   const { getRoomName } = useContext(SeatContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
@@ -28,13 +29,16 @@ const PriceTable = () => {
                 <td className="p-2 text-green-500">{getType(p.rowName)}</td>
                 <td className="p-2 text-right">{p.price} Ks</td>
                 <td className="flex p-2 items-center justify-center">
-                  <FaEdit
-                    size={18}
-                    className="mx-1 text-blue-600 cursor-pointer"
-                  />
+                  <Link to={`/admin/price/${p._id}`}>
+                    <FaEdit
+                      size={18}
+                      className="mx-1 text-blue-600 cursor-pointer"
+                    />
+                  </Link>
                   <FaTrash
                     size={18}
                     className="cursor-pointer mx-1 text-red-600"
+                    onClick={() => handleDeletePrice(p._id)}
                   />
                 </td>
               </tr>

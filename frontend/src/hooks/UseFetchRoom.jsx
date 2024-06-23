@@ -11,7 +11,16 @@ const postRoom = async (roomData) => {
     const res = await Axios.post("/rooms", roomData);
     return res.data;
   } catch (error) {
-    return error.message;
+    return error;
+  }
+};
+
+const deleteRoom = async (id) => {
+  try {
+    const res = await Axios.delete(`/rooms/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -27,6 +36,12 @@ const UseFetchRoom = () => {
       return postRoom(roomData);
     },
   });
-  return { isLoading, data, isError, error, mutations };
+  const deleteId = useMutation({
+    mutationKey: ["rooms"],
+    mutationFn: (roomId) => {
+      return deleteRoom(roomId);
+    },
+  });
+  return { isLoading, data, isError, error, mutations, deleteId };
 };
 export default UseFetchRoom;

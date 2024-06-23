@@ -20,6 +20,7 @@ const Navbar = ({ handleBtn }) => {
       console.log("logout error");
     }
   });
+  const user = localStorage.getItem("login");
   return (
     <div className="w-[82vw] bg-black h-[100px]">
       <div className="flex justify-between items-center w-[100%] py-2 px-8">
@@ -32,7 +33,7 @@ const Navbar = ({ handleBtn }) => {
           />
         </div>
         <div className="flex items-center justify-center">
-          <h1 className="text-2xl px-2 text-red-600 font-bold">Admin</h1>
+          <h1 className="text-xl text-red-600">{user}</h1>
           <img
             src={avator}
             alt="profile"

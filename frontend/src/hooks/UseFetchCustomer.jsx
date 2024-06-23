@@ -14,7 +14,14 @@ const postUser = async (userData) => {
     return error;
   }
 };
-
+const deleteUser = async (id) => {
+  try {
+    const res = await Axios.delete(`/users/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
 const UseFetchCustomer = () => {
   const {
     isLoading,
@@ -31,7 +38,13 @@ const UseFetchCustomer = () => {
       return postUser(userData);
     },
   });
-  return { isLoading, isError, error, customers, mutations };
+  const deleteId = useMutation({
+    mutationKey: ["users"],
+    mutationFn: (id) => {
+      return deleteUser(id);
+    },
+  });
+  return { isLoading, isError, error, customers, mutations, deleteId };
 };
 
 export default UseFetchCustomer;

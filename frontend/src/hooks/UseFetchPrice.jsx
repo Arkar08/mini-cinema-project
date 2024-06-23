@@ -11,7 +11,16 @@ const postPrice = async (priceData) => {
     const res = await Axios.post("/price", priceData);
     return res.data;
   } catch (error) {
-    return error.message;
+    return error;
+  }
+};
+
+const deletePrice = async (id) => {
+  try {
+    const res = await Axios.delete(`/price/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
   }
 };
 const UseFetchPrice = () => {
@@ -25,7 +34,13 @@ const UseFetchPrice = () => {
       return postPrice(priceData);
     },
   });
-  return { isLoading, isError, error, data, mutation };
+  const deleteId = useMutation({
+    mutationKey: ["price"],
+    mutationFn: (id) => {
+      return deletePrice(id);
+    },
+  });
+  return { isLoading, isError, error, data, mutation, deleteId };
 };
 
 export default UseFetchPrice;

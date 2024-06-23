@@ -28,6 +28,7 @@ const LoginContextProvider = ({ children }) => {
   useEffect(() => {
     if (loginMutations.isSuccess) {
       localStorage.setItem("token", loginMutations.data.token);
+      localStorage.setItem("login", loginMutations.data.email);
       localStorage.setItem("isAdmin", loginMutations.data.isAdmin);
       window.location.href = "/";
     }
