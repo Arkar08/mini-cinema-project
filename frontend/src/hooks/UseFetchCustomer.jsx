@@ -1,9 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useMutation, useQuery } from "react-query";
 import Axios from "../Api/Apiconfig";
+
 const getUser = async () => {
-  const res = await Axios.get("/users");
-  return res.data;
+  try {
+    const res = await Axios.get("/users");
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
 
 const postUser = async (userData) => {

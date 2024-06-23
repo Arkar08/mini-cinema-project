@@ -23,6 +23,22 @@ const deleteSeat = async (id) => {
     return error;
   }
 };
+const getId = async (id) => {
+  try {
+    const res = await Axios.get(`/seats/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+const updateSeat = async (seatData) => {
+  try {
+    const res = await Axios.patch(`/seats/${seatData._id}`, seatData);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
 
 const UseFetchSeat = () => {
   const { isLoading, isError, error, data } = useQuery({
@@ -41,7 +57,22 @@ const UseFetchSeat = () => {
       return deleteSeat(id);
     },
   });
-  return { isLoading, isError, error, data, mutationsSeat, deleteId };
+  const seatMutation = useMutation({
+    mutationKey: ["seats"],
+    mutationFn: (seatData) => {
+      return updateSeat(seatData);
+    },
+  });
+  return {
+    isLoading,
+    isError,
+    error,
+    data,
+    mutationsSeat,
+    deleteId,
+    getId,
+    seatMutation,
+  };
 };
 
 export default UseFetchSeat;

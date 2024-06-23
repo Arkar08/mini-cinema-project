@@ -13,20 +13,68 @@ const RoomContextProvider = ({ children }) => {
     data: rooms,
     mutations,
     deleteId,
+    updateMutation,
   } = UseFetchRoom();
   const [newRoom, setNewRoom] = useState({
     roomName: "",
     cinemaId: "",
     roomNo: "",
   });
+  const [editRoom, setEditRoom] = useState({
+    roomName: "",
+    cinemaId: "",
+    roomNo: "",
+  });
   const { cinemas } = useContext(CinemaContext);
 
+  const handleEditRoomChange = (value) => {
+    setEditRoom((prev) => {
+      return { ...prev, roomName: value };
+    });
+    console.log(value);
+  };
+
+  const handleEditCinemaId = (name) => {
+    if (name) {
+      setEditRoom((prev) => {
+        return { ...prev, cinemaId: getCinemaId(name) };
+      });
+    } else {
+      return "Unknown";
+    }
+  };
+
+  const handleEditRoomNo = (no) => {
+    setEditRoom((prev) => {
+      return { ...prev, roomNo: no };
+    });
+  };
+
   const getCinemaName = (id) => {
-    const getCinema = cinemas.find((c) => {
+    const getCinema = cinemas?.find((c) => {
       return c._id === id;
     });
     if (getCinema) {
       return getCinema.name;
+    } else {
+      return "Unknown";
+    }
+  };
+  const handleEditSave = () => {
+    if (!editRoom) {
+      console.error("editRoom is undefined or null");
+      return;
+    }
+    updateMutation.mutate(editRoom);
+    window.location.href = "/admin/room";
+    console.log(editRoom);
+  };
+  const getCinemaId = (name) => {
+    const getCinema = cinemas?.find((c) => {
+      return c.name === name;
+    });
+    if (getCinema) {
+      return getCinema._id;
     } else {
       return "Unknown";
     }
@@ -88,6 +136,12 @@ const RoomContextProvider = ({ children }) => {
         handleRoomNo,
         sortCinema,
         handleDeleteRoom,
+        handleEditCinemaId,
+        handleEditRoomChange,
+        handleEditRoomNo,
+        setEditRoom,
+        editRoom,
+        handleEditSave,
       }}
     >
       {children}

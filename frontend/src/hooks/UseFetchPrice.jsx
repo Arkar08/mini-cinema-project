@@ -14,7 +14,14 @@ const postPrice = async (priceData) => {
     return error;
   }
 };
-
+const getId = async (id) => {
+  try {
+    const res = await Axios.get(`/price/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
 const deletePrice = async (id) => {
   try {
     const res = await Axios.delete(`/price/${id}`);
@@ -40,7 +47,7 @@ const UseFetchPrice = () => {
       return deletePrice(id);
     },
   });
-  return { isLoading, isError, error, data, mutation, deleteId };
+  return { isLoading, isError, error, data, mutation, deleteId, getId };
 };
 
 export default UseFetchPrice;

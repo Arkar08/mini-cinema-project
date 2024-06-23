@@ -11,12 +11,37 @@ import {
 import { RxCross2 } from "react-icons/rx";
 import { dataRow, dataSeatNo } from "../../Data/data";
 import { SeatContext } from "../../context/SeatContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import UseFetchSeat from "../../hooks/UseFetchSeat";
 
 const EditSeat = () => {
-  const { sortRoom } = useContext(SeatContext);
+  const { seatId } = useParams();
+  const { getId } = UseFetchSeat();
+  const {
+    sortRoom,
+    setEditSeat,
+    editSeat,
+    getRoomName,
+    handleSeatRow,
+    handleSeatRoom,
+    handleSeatNoType,
+    EditSave,
+  } = useContext(SeatContext);
+  const { isLoading, isError } = useQuery(
+    ["seats", seatId],
+    () => getId(seatId),
+    {
+      onSuccess: (data) => {
+        setEditSeat(data);
+      },
+    }
+  );
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error fetching room with ID {seatId}</p>;
+
   return (
-    <Card className="mx-auto w-full max-w-[24rem]">
+    <Card className="mx-auto w-full max-w-[24rem] mt-4">
       <CardBody className="flex flex-col gap-4 relative">
         <Typography
           variant="h4"
@@ -35,7 +60,12 @@ const EditSeat = () => {
           <Typography className="-mb-2 text-red-400" variant="h6">
             Row Name
           </Typography>
-          <Select size="md" label="Select RowName">
+          <Select
+            size="md"
+            label="Select RowName"
+            value={editSeat?.rowName}
+            onChange={handleSeatRow}
+          >
             {dataRow.map((d, index) => {
               return (
                 <Option key={index} value={d}>
@@ -49,22 +79,31 @@ const EditSeat = () => {
           <Typography className="-mb-2 text-red-400" variant="h6">
             Room
           </Typography>
-          <Select size="md" label="Select RoomName">
-            {sortRoom &&
-              sortRoom.map((c, index) => {
-                return (
-                  <Option key={index} value={c._id}>
-                    {c.roomName}
-                  </Option>
-                );
-              })}
+          <Select
+            size="md"
+            label="Select RoomName"
+            value={getRoomName(editSeat?.roomId)}
+            onChange={handleSeatRoom}
+          >
+            {sortRoom?.map((c, index) => {
+              return (
+                <Option key={index} value={c.roomName}>
+                  {c.roomName}
+                </Option>
+              );
+            })}
           </Select>
         </div>
         <div className="flex w-[100%] flex-col gap-6">
           <Typography className="-mb-2 text-red-400" variant="h6">
             Seat No
           </Typography>
-          <Select size="md" label="Select RowName">
+          <Select
+            size="md"
+            label="Select SeatNo"
+            value={editSeat?.seatNo}
+            onChange={handleSeatNoType}
+          >
             {dataSeatNo.map((d, index) => {
               return (
                 <Option key={index} value={d}>
@@ -76,8 +115,8 @@ const EditSeat = () => {
         </div>
       </CardBody>
       <CardFooter className="pt-0">
-        <Button variant="gradient" fullWidth>
-          Save
+        <Button variant="gradient" fullWidth onClick={EditSave}>
+          Update
         </Button>
       </CardFooter>
     </Card>

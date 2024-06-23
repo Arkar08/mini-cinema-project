@@ -16,6 +16,12 @@ const PriceContextProvider = ({ children }) => {
     rowName: "",
     seatNo: "",
   });
+  const [editPrice, setEditPrice] = useState({
+    price: "",
+    roomId: "",
+    rowName: "",
+    seatNo: "",
+  });
   const handleActive = () => {
     setActive(!active);
   };
@@ -93,6 +99,8 @@ const PriceContextProvider = ({ children }) => {
         savePrice,
         getType,
         handleDeletePrice,
+        setEditPrice,
+        editPrice,
       }}
     >
       {children}

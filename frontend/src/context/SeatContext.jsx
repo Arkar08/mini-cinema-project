@@ -14,6 +14,51 @@ const SeatContextProvider = ({ children }) => {
     rowName: "",
     seatType: "",
   });
+  const [editSeat, setEditSeat] = useState({
+    roomId: "",
+    seatNo: "",
+    rowName: "",
+  });
+
+  const handleSeatRow = (value) => {
+    setEditSeat((prev) => {
+      return { ...prev, rowName: value };
+    });
+  };
+  const handleSeatRoom = (value) => {
+    if (value) {
+      setEditSeat((prev) => {
+        return { ...prev, cinemaId: getRoomId(value) };
+      });
+    } else {
+      return "Unknown";
+    }
+  };
+  const handleSeatNoType = (value) => {
+    setEditSeat((prev) => {
+      return { ...prev, seatNo: value };
+    });
+  };
+
+  const getRoomId = (name) => {
+    const getRoom = rooms?.find((c) => {
+      return c.roomName === name;
+    });
+    if (getRoom) {
+      return getRoom._id;
+    } else {
+      return "Unknown";
+    }
+  };
+
+  const EditSave = () => {
+    if (!editSeat) {
+      console.error("editSeat is undefined or null");
+      return;
+    }
+    seatMutation.mutate(editSeat);
+    window.location.href = "/admin/seat";
+  };
   const handleSeat = () => {
     setOneSeat(!oneSeat);
   };
@@ -24,6 +69,7 @@ const SeatContextProvider = ({ children }) => {
     data: seats,
     mutationsSeat,
     deleteId,
+    seatMutation,
   } = UseFetchSeat();
 
   const getRoomName = (id) => {
@@ -89,6 +135,12 @@ const SeatContextProvider = ({ children }) => {
         seatSave,
         sortRoom,
         handeldeleteSeat,
+        setEditSeat,
+        editSeat,
+        handleSeatRow,
+        handleSeatRoom,
+        handleSeatNoType,
+        EditSave,
       }}
     >
       {children}

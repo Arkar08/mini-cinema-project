@@ -55,7 +55,7 @@ const CreateSeat = () => {
             </Typography>
             <Select
               size="md"
-              label="Select RowName"
+              label="Select SeatNo"
               value={newSeat.seatNo}
               onChange={handleSeatNo}
             >
