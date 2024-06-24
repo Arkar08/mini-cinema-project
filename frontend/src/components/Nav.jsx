@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const navlinks = [
@@ -36,6 +37,11 @@ const navlinks = [
 ];
 
 const Nav = () => {
+  const [active, setActive] = useState(null);
+  const handleSwipe = (index) => {
+    setActive(index);
+  };
+
   return (
     <div className="flex flex-col text-red-600 mt-6 justify-center text-start px-8">
       {navlinks.map((nav, index) => {
@@ -43,7 +49,10 @@ const Nav = () => {
           <NavLink
             to={nav.url}
             key={index}
-            className="p-2 m-2 rounded-md hover:bg-gray-300"
+            className={`p-2 m-2 rounded-md hover:bg-gray-500 ${
+              active === index ? "bg-white" : ""
+            }`}
+            onClick={() => handleSwipe(index)}
           >
             {nav.title}
           </NavLink>
