@@ -15,11 +15,19 @@ import { dataRow, dataSeatNo } from "../../Data/data";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import UseFetchPrice from "../../hooks/UseFetchPrice";
-import { SeatContext } from "../../context/SeatContext";
 
 const EditPrice = () => {
   const { priceId } = useParams();
-  const { sortData, setEditPrice, editPrice } = useContext(PriceContext);
+  const {
+    sortData,
+    setEditPrice,
+    editPrice,
+    postEditPrice,
+    editRoom,
+    handleEditSeatRow,
+    handleEditSeatNo,
+    editSave,
+  } = useContext(PriceContext);
   const { isLoading, isError } = useQuery(
     ["seats", priceId],
     () => getId(priceId),
@@ -30,7 +38,6 @@ const EditPrice = () => {
     }
   );
   const { getId } = UseFetchPrice();
-  const { getRoomName } = useContext(SeatContext);
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching room with ID {priceId}</p>;
@@ -42,7 +49,7 @@ const EditPrice = () => {
           color="blue-gray"
           className="text-red-400 text-center"
         >
-          New Price
+          Update Price
         </Typography>
         <Link to="/admin/price">
           <RxCross2
@@ -57,11 +64,12 @@ const EditPrice = () => {
           <Select
             size="md"
             label="Select RoomName"
-            value={getRoomName(editPrice?.roomId)}
+            value={editPrice?.roomId}
+            onChange={editRoom}
           >
             {sortData?.map((c) => {
               return (
-                <Option key={c._id} value={c.name}>
+                <Option key={c._id} value={c._id}>
                   {c.roomName}
                 </Option>
               );
@@ -72,7 +80,12 @@ const EditPrice = () => {
           <Typography className="-mb-2 text-red-400" variant="h6">
             Row Name
           </Typography>
-          <Select size="md" label="Select RowName" value={editPrice?.rowName}>
+          <Select
+            size="md"
+            label="Select RowName"
+            value={editPrice?.rowName}
+            onChange={handleEditSeatRow}
+          >
             {dataRow.map((d, index) => {
               return (
                 <Option key={index} value={d}>
@@ -86,7 +99,12 @@ const EditPrice = () => {
           <Typography className="-mb-2 text-red-400" variant="h6">
             Seat No
           </Typography>
-          <Select size="md" label="Select SeatNo" value={editPrice?.seatNo}>
+          <Select
+            size="md"
+            label="Select SeatNo"
+            value={editPrice?.seatNo}
+            onChange={handleEditSeatNo}
+          >
             {dataSeatNo.map((d, index) => {
               return (
                 <Option key={index} value={d}>
@@ -99,11 +117,17 @@ const EditPrice = () => {
         <Typography className="-mb-2 text-red-400" variant="h6">
           Price
         </Typography>
-        <Input label="Price" size="lg" type="number" value={editPrice?.price} />
+        <Input
+          label="Price"
+          size="lg"
+          type="number"
+          value={editPrice?.price}
+          onChange={postEditPrice}
+        />
       </CardBody>
       <CardFooter className="pt-0">
-        <Button variant="gradient" fullWidth>
-          Save
+        <Button variant="gradient" fullWidth onClick={editSave}>
+          Update
         </Button>
       </CardFooter>
     </Card>

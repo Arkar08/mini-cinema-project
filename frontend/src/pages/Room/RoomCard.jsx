@@ -3,7 +3,8 @@ import { useContext } from "react";
 import { RoomContext } from "../../context/RoomContext";
 import { Link } from "react-router-dom";
 const RoomCard = () => {
-  const { rooms, getCinemaName, handleDeleteRoom } = useContext(RoomContext);
+  const { getCinemaName, handleDeleteRoom, currentItem } =
+    useContext(RoomContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
       <thead>
@@ -16,8 +17,8 @@ const RoomCard = () => {
         </tr>
       </thead>
       <tbody>
-        {rooms &&
-          rooms.map((r) => {
+        {currentItem &&
+          currentItem.map((r) => {
             return (
               <tr className="text-center  border text-red-500" key={r._id}>
                 <td className="p-2">{r._id}</td>

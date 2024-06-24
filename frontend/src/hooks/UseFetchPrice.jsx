@@ -22,6 +22,14 @@ const getId = async (id) => {
     return error;
   }
 };
+const updateId = async (priceDataId) => {
+  try {
+    const res = await Axios.patch(`/price/${priceDataId._id}`, priceDataId);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
 const deletePrice = async (id) => {
   try {
     const res = await Axios.delete(`/price/${id}`);
@@ -41,13 +49,28 @@ const UseFetchPrice = () => {
       return postPrice(priceData);
     },
   });
+  const updateMutation = useMutation({
+    mutationKey: ["price"],
+    mutationFn: (priceDataId) => {
+      return updateId(priceDataId);
+    },
+  });
   const deleteId = useMutation({
     mutationKey: ["price"],
     mutationFn: (id) => {
       return deletePrice(id);
     },
   });
-  return { isLoading, isError, error, data, mutation, deleteId, getId };
+  return {
+    isLoading,
+    isError,
+    error,
+    data,
+    mutation,
+    deleteId,
+    getId,
+    updateMutation,
+  };
 };
 
 export default UseFetchPrice;

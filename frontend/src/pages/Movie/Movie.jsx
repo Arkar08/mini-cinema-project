@@ -3,9 +3,10 @@ import MovieCard from "./MovieCard";
 import CreateMovie from "./CreateMovie";
 import { useContext } from "react";
 import { MovieContext } from "../../context/MovieContext";
+import MoviePagination from "./MoviePagination";
 
 const Movie = () => {
-  const { isLoading, isError, handleClose, error, movies } =
+  const { isLoading, isError, handleClose, error, currentItem } =
     useContext(MovieContext);
   return (
     <div className="h-[100%]">
@@ -27,8 +28,8 @@ const Movie = () => {
         </div>
       ) : (
         <div className="grid grid-cols-4 m-4 gap-4">
-          {movies &&
-            movies.map((m) => {
+          {currentItem &&
+            currentItem.map((m) => {
               return <MovieCard key={m._id} m={m} />;
             })}
         </div>
@@ -38,6 +39,7 @@ const Movie = () => {
           <h2>{error}</h2>
         </div>
       )}
+      <MoviePagination />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 const CustomerTable = () => {
-  const { customers, getStateName, getTownshipName, handleDelete } =
+  const { currentItem, getStateName, getTownshipName, handleDelete } =
     useContext(CustomerContext);
   return (
     <table className="w-[90%] border-collapse border  mt-4 mx-auto">
@@ -23,8 +23,8 @@ const CustomerTable = () => {
         </tr>
       </thead>
       <tbody>
-        {customers &&
-          customers.map((c) => {
+        {currentItem &&
+          currentItem.map((c) => {
             return (
               <tr className="text-center  border text-red-500" key={c._id}>
                 <td className="p-2">{c._id}</td>

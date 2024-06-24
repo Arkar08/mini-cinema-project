@@ -4,7 +4,7 @@ import { PriceContext } from "../../context/PriceContext";
 import { SeatContext } from "../../context/SeatContext";
 import { Link } from "react-router-dom";
 const PriceTable = () => {
-  const { price, getType, handleDeletePrice } = useContext(PriceContext);
+  const { currentItem, getType, handleDeletePrice } = useContext(PriceContext);
   const { getRoomName } = useContext(SeatContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
@@ -19,8 +19,8 @@ const PriceTable = () => {
         </tr>
       </thead>
       <tbody>
-        {price &&
-          price.map((p) => {
+        {currentItem &&
+          currentItem.map((p) => {
             return (
               <tr className="text-center  border text-red-500" key={p._id}>
                 <td className="p-2">{p._id}</td>

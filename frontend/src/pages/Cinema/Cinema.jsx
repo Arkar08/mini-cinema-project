@@ -3,9 +3,10 @@ import Card from "./Card";
 import CreateCinema from "./CreateCinema";
 import { useContext } from "react";
 import { CinemaContext } from "../../context/CinemaContext";
+import CinemaPagination from "./CinemaPagination";
 
 const Cinema = () => {
-  const { cinemas, handleClick, isLoading, isError, error } =
+  const { currentItem, handleClick, isLoading, isError, error } =
     useContext(CinemaContext);
   return (
     <div className="h-[100%]">
@@ -27,8 +28,8 @@ const Cinema = () => {
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-4 px-8 mt-4">
-          {cinemas &&
-            cinemas.map((c) => {
+          {currentItem &&
+            currentItem.map((c) => {
               return <Card key={c._id} c={c} />;
             })}
         </div>
@@ -38,6 +39,7 @@ const Cinema = () => {
           <h2>{error}</h2>
         </div>
       )}
+      <CinemaPagination />
     </div>
   );
 };

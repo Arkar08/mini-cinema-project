@@ -3,6 +3,7 @@ import CardSeat from "./CardSeat";
 import CreateSeat from "./CreateSeat";
 import { useContext } from "react";
 import { SeatContext } from "../../context/SeatContext";
+import SeatPagination from "./SeatPagination";
 
 const Seat = () => {
   const { handleSeat, isLoading, isError, error } = useContext(SeatContext);
@@ -32,6 +33,7 @@ const Seat = () => {
           <h2>{error}</h2>
         </div>
       )}
+      <SeatPagination />
     </div>
   );
 };

@@ -32,8 +32,66 @@ const PriceContextProvider = ({ children }) => {
     data: price,
     mutation,
     deleteId,
+    updateMutation,
   } = UseFetchPrice();
 
+  const [activePrice, setActivePrice] = useState(1);
+  const [itemPerPage] = useState(2);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
+  const pages = [];
+  const lastPage = itemPerPage * activePrice;
+  const firstPage = lastPage - itemPerPage;
+  const currentItem = price?.slice(firstPage, lastPage);
+  for (let i = 1; i <= Math.ceil(price?.length / itemPerPage); i++) {
+    pages.push(i);
+  }
+
+  const prevClick = () => {
+    setActivePrice((prev) => prev - 1);
+    if ((activePrice - 1) % itemPerPage == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit - itemPerPage);
+    }
+  };
+  const nextClick = () => {
+    setActivePrice((prev) => prev + 1);
+    if (activePrice + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit + itemPerPage);
+    }
+  };
+  const handleClick = (e) => {
+    return setActivePrice(Number(e.target.id));
+  };
+
+  const handleEditSeatRow = (value) => {
+    setEditPrice((prev) => {
+      return { ...prev, rowName: value };
+    });
+  };
+  const handleEditSeatNo = (value) => {
+    setEditPrice((prev) => {
+      return { ...prev, seatNo: value };
+    });
+  };
+  const editRoom = (value) => {
+    return setEditPrice((prev) => {
+      return { ...prev, roomId: value };
+    });
+  };
+  const postEditPrice = (e) => {
+    return setEditPrice((prev) => {
+      return { ...prev, price: Number(e.target.value) };
+    });
+  };
+  const editSave = () => {
+    if (!editPrice) {
+      console.error("editPrice is undefined or null");
+    }
+    updateMutation.mutate(editPrice);
+    window.location.href = "/admin/price";
+  };
   const postRoom = (value) => {
     return setNewPrice((prev) => {
       return { ...prev, roomId: value };
@@ -101,6 +159,17 @@ const PriceContextProvider = ({ children }) => {
         handleDeletePrice,
         setEditPrice,
         editPrice,
+        postEditPrice,
+        editRoom,
+        handleEditSeatRow,
+        handleEditSeatNo,
+        editSave,
+        currentItem,
+        handleClick,
+        nextClick,
+        prevClick,
+        pages,
+        activePrice,
       }}
     >
       {children}

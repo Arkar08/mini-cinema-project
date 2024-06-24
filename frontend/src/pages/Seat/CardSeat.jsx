@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const CardSeat = () => {
-  const { seats, getRoomName, handeldeleteSeat } = useContext(SeatContext);
+  const { currentItem, getRoomName, handeldeleteSeat } =
+    useContext(SeatContext);
   return (
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
       <thead>
@@ -19,8 +20,8 @@ const CardSeat = () => {
         </tr>
       </thead>
       <tbody>
-        {seats &&
-          seats.map((s) => {
+        {currentItem &&
+          currentItem.map((s) => {
             return (
               <tr className="text-center  border text-red-500" key={s._id}>
                 <td className="p-2">{s._id}</td>

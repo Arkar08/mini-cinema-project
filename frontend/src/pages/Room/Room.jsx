@@ -3,6 +3,7 @@ import RoomCard from "./RoomCard";
 import CreateRoom from "./CreateRoom";
 import { useContext } from "react";
 import { RoomContext } from "../../context/RoomContext";
+import Pagination from "./Pagination";
 
 const Room = () => {
   const { handleOpen, isLoading, isError, error } = useContext(RoomContext);
@@ -32,6 +33,7 @@ const Room = () => {
           <h2>{error}</h2>
         </div>
       )}
+      <Pagination />
     </div>
   );
 };

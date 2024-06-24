@@ -19,6 +19,36 @@ const MovieContextProvider = ({ children }) => {
     isError,
     mutation,
   } = UseFetchMovies();
+  const [activeMovie, setActiveMovie] = useState(1);
+  const [itemPerPage] = useState(4);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
+  const pages = [];
+  const lastPage = itemPerPage * activeMovie;
+  const firstPage = lastPage - itemPerPage;
+  const currentItem = movies?.slice(firstPage, lastPage);
+  for (let i = 1; i <= Math.ceil(movies?.length / itemPerPage); i++) {
+    pages.push(i);
+  }
+
+  const prevClick = () => {
+    setActiveMovie((prev) => prev - 1);
+    if ((activeMovie - 1) % itemPerPage == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit - itemPerPage);
+    }
+  };
+  const nextClick = () => {
+    setActiveMovie((prev) => prev + 1);
+    if (activeMovie + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit + itemPerPage);
+    }
+  };
+  const handleClick = (e) => {
+    return setActiveMovie(Number(e.target.id));
+  };
+
   const handleClose = () => {
     setIsClose(!isClose);
   };
@@ -49,6 +79,12 @@ const MovieContextProvider = ({ children }) => {
         postMovies,
         movieChange,
         movieSave,
+        currentItem,
+        handleClick,
+        nextClick,
+        prevClick,
+        pages,
+        activeMovie,
       }}
     >
       {children}

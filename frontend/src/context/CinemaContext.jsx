@@ -10,6 +10,43 @@ const CinemaContextProvider = ({ children }) => {
     name: "",
     location: "",
   });
+  const {
+    isFetching,
+    isError,
+    error,
+    data: cinemas,
+    mutation,
+  } = UseFetchCinema();
+
+  const [activeCinema, setActiveCinema] = useState(1);
+  const [itemPerPage] = useState(4);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
+  const pages = [];
+  const lastPage = itemPerPage * activeCinema;
+  const firstPage = lastPage - itemPerPage;
+  const currentItem = cinemas?.slice(firstPage, lastPage);
+  for (let i = 1; i <= Math.ceil(cinemas?.length / itemPerPage); i++) {
+    pages.push(i);
+  }
+
+  const prevClick = () => {
+    setActiveCinema((prev) => prev - 1);
+    if ((activeCinema - 1) % itemPerPage == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit - itemPerPage);
+    }
+  };
+  const nextClick = () => {
+    setActiveCinema((prev) => prev + 1);
+    if (activeCinema + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit + itemPerPage);
+    }
+  };
+  const handle = (e) => {
+    return setActiveCinema(Number(e.target.id));
+  };
 
   const handleCreate = (e) => {
     const { name, value } = e.target;
@@ -21,13 +58,6 @@ const CinemaContextProvider = ({ children }) => {
   const handleClick = () => {
     setOpen(!open);
   };
-  const {
-    isFetching,
-    isError,
-    error,
-    data: cinemas,
-    mutation,
-  } = UseFetchCinema();
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -49,6 +79,12 @@ const CinemaContextProvider = ({ children }) => {
         createCinema,
         handleCreate,
         handleSave,
+        activeCinema,
+        pages,
+        currentItem,
+        nextClick,
+        prevClick,
+        handle,
       }}
     >
       {children}

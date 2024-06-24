@@ -3,6 +3,7 @@ import { Button, Spinner } from "@material-tailwind/react";
 import CreatePrice from "./CreatePrice";
 import { useContext } from "react";
 import { PriceContext } from "../../context/PriceContext";
+import PricePagination from "./PricePagination";
 
 const SeatPrice = () => {
   const { handleActive, error, isError, isLoading } = useContext(PriceContext);
@@ -32,6 +33,7 @@ const SeatPrice = () => {
           <h2>{error}</h2>
         </div>
       )}
+      <PricePagination />
     </div>
   );
 };

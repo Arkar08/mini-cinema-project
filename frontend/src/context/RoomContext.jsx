@@ -26,7 +26,35 @@ const RoomContextProvider = ({ children }) => {
     roomNo: "",
   });
   const { cinemas } = useContext(CinemaContext);
+  const [active, setActive] = useState(1);
+  const [itemPerPage] = useState(1);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
+  const pages = [];
+  const lastPage = itemPerPage * active;
+  const firstPage = lastPage - itemPerPage;
+  const currentItem = rooms?.slice(firstPage, lastPage);
+  for (let i = 1; i <= Math.ceil(rooms?.length / itemPerPage); i++) {
+    pages.push(i);
+  }
 
+  const prevClick = () => {
+    setActive((prev) => prev - 1);
+    if ((active - 1) % itemPerPage == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit - itemPerPage);
+    }
+  };
+  const nextClick = () => {
+    setActive((prev) => prev + 1);
+    if (active + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit + itemPerPage);
+    }
+  };
+  const handleClick = (e) => {
+    return setActive(Number(e.target.id));
+  };
   const handleEditRoomChange = (value) => {
     setEditRoom((prev) => {
       return { ...prev, roomName: value };
@@ -142,6 +170,12 @@ const RoomContextProvider = ({ children }) => {
         setEditRoom,
         editRoom,
         handleEditSave,
+        active,
+        pages,
+        currentItem,
+        nextClick,
+        prevClick,
+        handleClick,
       }}
     >
       {children}

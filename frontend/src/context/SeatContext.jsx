@@ -19,6 +19,45 @@ const SeatContextProvider = ({ children }) => {
     seatNo: "",
     rowName: "",
   });
+  const {
+    isLoading,
+    isError,
+    error,
+    data: seats,
+    mutationsSeat,
+    deleteId,
+    seatMutation,
+  } = UseFetchSeat();
+
+  const [activeSeat, setActiveSeat] = useState(1);
+  const [itemPerPage] = useState(2);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
+  const pages = [];
+  const lastPage = itemPerPage * activeSeat;
+  const firstPage = lastPage - itemPerPage;
+  const currentItem = seats?.slice(firstPage, lastPage);
+  for (let i = 1; i <= Math.ceil(seats?.length / itemPerPage); i++) {
+    pages.push(i);
+  }
+
+  const prevClick = () => {
+    setActiveSeat((prev) => prev - 1);
+    if ((activeSeat - 1) % itemPerPage == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit - itemPerPage);
+    }
+  };
+  const nextClick = () => {
+    setActiveSeat((prev) => prev + 1);
+    if (activeSeat + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + itemPerPage);
+      setMiniPageNumberLimit(miniPageNumberLimit + itemPerPage);
+    }
+  };
+  const handleClick = (e) => {
+    return setActiveSeat(Number(e.target.id));
+  };
 
   const handleSeatRow = (value) => {
     setEditSeat((prev) => {
@@ -62,15 +101,6 @@ const SeatContextProvider = ({ children }) => {
   const handleSeat = () => {
     setOneSeat(!oneSeat);
   };
-  const {
-    isLoading,
-    isError,
-    error,
-    data: seats,
-    mutationsSeat,
-    deleteId,
-    seatMutation,
-  } = UseFetchSeat();
 
   const getRoomName = (id) => {
     const getRoom = rooms?.find((c) => {
@@ -141,6 +171,12 @@ const SeatContextProvider = ({ children }) => {
         handleSeatRoom,
         handleSeatNoType,
         EditSave,
+        currentItem,
+        handleClick,
+        nextClick,
+        prevClick,
+        pages,
+        activeSeat,
       }}
     >
       {children}
