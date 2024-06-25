@@ -3,7 +3,6 @@ import CustomerTable from "./CustomerTable";
 import { useContext } from "react";
 import CreateCustomer from "./CreateCustomer";
 import { CustomerContext } from "../../context/CustomerContext";
-import CustomerPagination from "./CustomerPagination";
 
 const Customer = () => {
   const { handleCreate, isError, isLoading, error } =
@@ -36,7 +35,6 @@ const Customer = () => {
           <h2>{error}</h2>
         </div>
       )}
-      <CustomerPagination />
     </div>
   );
 };

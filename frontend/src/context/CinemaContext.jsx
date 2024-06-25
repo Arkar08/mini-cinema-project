@@ -19,7 +19,7 @@ const CinemaContextProvider = ({ children }) => {
   } = UseFetchCinema();
 
   const [activeCinema, setActiveCinema] = useState(1);
-  const [itemPerPage] = useState(4);
+  const [itemPerPage] = useState(8);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
   const pages = [];

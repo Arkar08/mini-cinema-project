@@ -19,35 +19,6 @@ const CustomerContextProvider = ({ children }) => {
     dateOfBirth: "",
   });
   const [create, setCreate] = useState(false);
-  const [activeUser, setActiveUser] = useState(1);
-  const [itemPerPage] = useState(1);
-  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
-  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
-  const pages = [];
-  const lastPage = itemPerPage * activeUser;
-  const firstPage = lastPage - itemPerPage;
-  const currentItem = customers?.slice(firstPage, lastPage);
-  for (let i = 1; i <= Math.ceil(customers?.length / itemPerPage); i++) {
-    pages.push(i);
-  }
-
-  const prevClick = () => {
-    setActiveUser((prev) => prev - 1);
-    if ((activeUser - 1) % itemPerPage == 0) {
-      setMaxPageNumberLimit(maxPageNumberLimit - itemPerPage);
-      setMiniPageNumberLimit(miniPageNumberLimit - itemPerPage);
-    }
-  };
-  const nextClick = () => {
-    setActiveUser((prev) => prev + 1);
-    if (activeUser + 1 > maxPageNumberLimit) {
-      setMaxPageNumberLimit(maxPageNumberLimit + itemPerPage);
-      setMiniPageNumberLimit(miniPageNumberLimit + itemPerPage);
-    }
-  };
-  const handleClick = (e) => {
-    return setActiveUser(Number(e.target.id));
-  };
 
   const handleCreate = () => {
     setCreate(!create);
@@ -126,12 +97,6 @@ const CustomerContextProvider = ({ children }) => {
         handleTownship,
         checkDisabled,
         handleDelete,
-        currentItem,
-        handleClick,
-        nextClick,
-        prevClick,
-        pages,
-        activeUser,
       }}
     >
       {children}
