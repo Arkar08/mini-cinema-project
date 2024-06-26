@@ -10,14 +10,26 @@ const CinemaContextProvider = ({ children }) => {
     name: "",
     location: "",
   });
+  const [editCinema, setEditCinema] = useState({
+    name: "",
+    location: "",
+  });
   const {
     isFetching,
     isError,
     error,
     data: cinemas,
     mutation,
+    deleteMutation,
+    updateMutation,
   } = UseFetchCinema();
 
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    return setEditCinema((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
   const [activeCinema, setActiveCinema] = useState(1);
   const [itemPerPage] = useState(8);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
@@ -67,6 +79,20 @@ const CinemaContextProvider = ({ children }) => {
     window.location.reload();
   };
 
+  const handleUpdate = () => {
+    if (!editCinema) {
+      console.error("editcinema is undefined or null");
+    }
+    updateMutation.mutate(editCinema);
+    window.location.href = "/admin/cinema";
+  };
+  const handleDelete = (id) => {
+    const confirm = window.confirm("Are you want to delete?");
+    if (confirm) {
+      deleteMutation.mutate(id);
+      window.location.reload();
+    }
+  };
   return (
     <CinemaContext.Provider
       value={{
@@ -85,6 +111,11 @@ const CinemaContextProvider = ({ children }) => {
         nextClick,
         prevClick,
         handle,
+        handleDelete,
+        setEditCinema,
+        editCinema,
+        handleEditChange,
+        handleUpdate,
       }}
     >
       {children}

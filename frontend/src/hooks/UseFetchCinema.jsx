@@ -10,9 +10,33 @@ const getCinema = async () => {
 const postCinema = async (userData) => {
   try {
     const res = await Axios.post("/cinemas", userData);
-    return res;
+    return res.data;
   } catch (error) {
     return error.message;
+  }
+};
+const getId = async (cineId) => {
+  try {
+    const res = await Axios.get(`/cinemas/${cineId}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+const deleteCinema = async (cinemaId) => {
+  try {
+    const res = await Axios.delete(`/cinemas/${cinemaId}`);
+    return res.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+const updateCinema = async (cinema) => {
+  try {
+    const res = await Axios.patch(`/cinemas/${cinema._id}`, cinema);
+    return res.data;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -27,7 +51,28 @@ const UseFetchCinema = () => {
       return postCinema(userData);
     },
   });
-  return { isLoading, isError, data, error, mutation };
+  const updateMutation = useMutation({
+    mutationKey: ["cinemas"],
+    mutationFn: (cinema) => {
+      return updateCinema(cinema);
+    },
+  });
+  const deleteMutation = useMutation({
+    mutationKey: ["cinemas"],
+    mutationFn: (cinemaId) => {
+      return deleteCinema(cinemaId);
+    },
+  });
+  return {
+    isLoading,
+    isError,
+    data,
+    error,
+    mutation,
+    deleteMutation,
+    getId,
+    updateMutation,
+  };
 };
 
 export default UseFetchCinema;

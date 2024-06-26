@@ -7,8 +7,29 @@ const getMovies = async () => {
 };
 
 const postMovies = async (moviesData) => {
-  const res = await Axios.post("/movies", moviesData);
-  return res.data;
+  try {
+    const res = await Axios.post("/movies", moviesData);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+const getId = async (movie) => {
+  try {
+    const res = await Axios.get(`/movies/${movie}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const deleteMovie = async (movieId) => {
+  try {
+    const res = await Axios.delete(`/movies/${movieId}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
 };
 const UseFetchMovies = () => {
   const { isLoading, error, isError, data } = useQuery({
@@ -21,7 +42,13 @@ const UseFetchMovies = () => {
       return postMovies(moviesData);
     },
   });
-  return { isLoading, error, isError, data, mutation };
+  const deleteMutation = useMutation({
+    mutationKey: ["movies"],
+    mutationFn: (movieId) => {
+      return deleteMovie(movieId);
+    },
+  });
+  return { isLoading, error, isError, data, mutation, deleteMutation, getId };
 };
 
 export default UseFetchMovies;

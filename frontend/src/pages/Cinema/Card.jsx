@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 import { FaEdit, FaTrash } from "react-icons/fa";
 import cinemaImg from "../../Data/cinemalist_photo.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CinemaContext } from "../../context/CinemaContext";
+import { Link } from "react-router-dom";
 
 const Card = ({ c }) => {
   const [active, setActive] = useState(false);
+  const { handleDelete } = useContext(CinemaContext);
   const handleMouseEnter = () => {
     setActive(true);
   };
@@ -13,7 +16,7 @@ const Card = ({ c }) => {
   };
   return (
     <div
-      className="border cursor-pointer text-center rounded-md bg-black text-red-600 h-[180px] relative"
+      className="border cursor-pointer text-center rounded-md bg-black text-red-600 h-[200px] relative"
       key={c._id}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -21,7 +24,7 @@ const Card = ({ c }) => {
       <img
         src={cinemaImg}
         alt="cinema_image"
-        className="w-[100%] h-[80%] p-2 rounded-lg object-cover object-center"
+        className="w-[90%] h-[72%] p-2 rounded-lg object-cover object-center mx-auto"
       />
       <h2 className="text-xl px-2 uppercase">{c.name}</h2>
       <div
@@ -29,8 +32,15 @@ const Card = ({ c }) => {
           active ? "opacity-100" : "opacity-0"
         }`}
       >
-        <FaEdit className="text-blue-500 m-2 transition-transform duration-300 transform hover:scale-110" />
-        <FaTrash className="text-red-500 m-2 transition-transform duration-300 transform hover:scale-110" />
+        <Link to={`/admin/cinema/${c._id}`}>
+          <FaEdit className="text-blue-500 m-2 transition-transform duration-300 transform hover:scale-110" />
+        </Link>
+        <FaTrash
+          className="text-red-500 m-2 transition-transform duration-300 transform hover:scale-110"
+          onClick={() => {
+            handleDelete(c._id);
+          }}
+        />
       </div>
     </div>
   );

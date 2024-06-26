@@ -12,12 +12,19 @@ const MovieContextProvider = ({ children }) => {
     duration: "",
     photo: "",
   });
+  const [editMovies, setEditMovies] = useState({
+    title: "",
+    date: "",
+    duration: "",
+    photo: "",
+  });
   const {
     isLoading,
     error,
     data: movies,
     isError,
     mutation,
+    deleteMutation,
   } = UseFetchMovies();
   const [activeMovie, setActiveMovie] = useState(1);
   const [itemPerPage] = useState(4);
@@ -62,10 +69,27 @@ const MovieContextProvider = ({ children }) => {
       };
     });
   };
+  const updateChange = (e) => {
+    const { name, value } = e.target;
+    setEditMovies((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
   const movieSave = () => {
     mutation.mutate(postMovies);
     setIsClose(!isClose);
     window.location.reload();
+  };
+
+  const deleteMovie = (id) => {
+    const confirm = window.confirm("Are you want to delete?");
+    if (confirm) {
+      deleteMutation.mutate(id);
+      window.location.reload();
+    }
   };
   return (
     <MovieContext.Provider
@@ -85,6 +109,10 @@ const MovieContextProvider = ({ children }) => {
         prevClick,
         pages,
         activeMovie,
+        deleteMovie,
+        setEditMovies,
+        editMovies,
+        updateChange,
       }}
     >
       {children}
