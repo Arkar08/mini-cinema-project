@@ -13,25 +13,22 @@ import { useQuery } from "react-query";
 import { useContext } from "react";
 import { MovieContext } from "../../context/MovieContext";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const EditMovie = () => {
   const { movieId } = useParams();
-  console.log(movieId);
   const { getId } = UseFetchMovies();
-  const { setEditMovies, editMovies, updateChange } = useContext(MovieContext);
+  const { setEditMovies, editMovies, updateChange, updateSave } =
+    useContext(MovieContext);
   const { isLoading, isError } = useQuery(
-    ["movies", movieId],
-    () => {
-      getId(movieId);
-    },
+    ["room", movieId],
+    () => getId(movieId),
     {
       onSuccess: (data) => {
-        console.log(data);
         setEditMovies(data);
       },
     }
   );
-  console.log(editMovies);
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching room with ID {movieId}</p>;
   return (
@@ -66,10 +63,10 @@ const EditMovie = () => {
         <Input
           label="Date"
           size="lg"
-          type="date"
+          type="text"
           name="date"
-          value={editMovies?.date}
-          onChange={updateChange}
+          value={moment(editMovies?.date).format("LL")}
+          disabled
         />
         <Typography className="-mb-2 text-red-400" variant="h6">
           Duration
@@ -93,7 +90,7 @@ const EditMovie = () => {
         />
       </CardBody>
       <CardFooter className="pt-0">
-        <Button variant="gradient" fullWidth>
+        <Button variant="gradient" fullWidth onClick={updateSave}>
           Update
         </Button>
       </CardFooter>

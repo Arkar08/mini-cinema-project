@@ -25,6 +25,7 @@ const MovieContextProvider = ({ children }) => {
     isError,
     mutation,
     deleteMutation,
+    updateMutation,
   } = UseFetchMovies();
   const [activeMovie, setActiveMovie] = useState(1);
   const [itemPerPage] = useState(4);
@@ -78,6 +79,13 @@ const MovieContextProvider = ({ children }) => {
       };
     });
   };
+  const updateSave = () => {
+    if (!editMovies) {
+      console.error("editMovies is undefined or null");
+    }
+    updateMutation.mutate(editMovies);
+    window.location.href = "/admin/movie";
+  };
   const movieSave = () => {
     mutation.mutate(postMovies);
     setIsClose(!isClose);
@@ -113,6 +121,7 @@ const MovieContextProvider = ({ children }) => {
         setEditMovies,
         editMovies,
         updateChange,
+        updateSave,
       }}
     >
       {children}

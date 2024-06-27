@@ -27,7 +27,7 @@ const Cinema = () => {
           <Spinner />
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-2 px-8 mt-1">
+        <div className="grid grid-cols-4 gap-2 px-8 mt-2">
           {currentItem &&
             currentItem.map((c) => {
               return <Card key={c._id} c={c} />;

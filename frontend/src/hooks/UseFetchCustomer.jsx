@@ -19,6 +19,22 @@ const postUser = async (userData) => {
     return error;
   }
 };
+const getId = async (userId) => {
+  try {
+    const res = await Axios.get(`/users/${userId}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+const updateUser = async (users) => {
+  try {
+    const res = await Axios.patch(`/users/${users._id}`, users);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
 const deleteUser = async (id) => {
   try {
     const res = await Axios.delete(`/users/${id}`);
@@ -43,13 +59,28 @@ const UseFetchCustomer = () => {
       return postUser(userData);
     },
   });
+  const updateMutation = useMutation({
+    mutationKey: ["users"],
+    mutationFn: (users) => {
+      return updateUser(users);
+    },
+  });
   const deleteId = useMutation({
     mutationKey: ["users"],
     mutationFn: (id) => {
       return deleteUser(id);
     },
   });
-  return { isLoading, isError, error, customers, mutations, deleteId };
+  return {
+    isLoading,
+    isError,
+    error,
+    customers,
+    mutations,
+    deleteId,
+    getId,
+    updateMutation,
+  };
 };
 
 export default UseFetchCustomer;

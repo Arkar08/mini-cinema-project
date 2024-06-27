@@ -23,6 +23,15 @@ const getId = async (movie) => {
   }
 };
 
+const updateMovie = async (movies) => {
+  try {
+    const res = await Axios.patch(`/movies/${movies._id}`, movies);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 const deleteMovie = async (movieId) => {
   try {
     const res = await Axios.delete(`/movies/${movieId}`);
@@ -42,13 +51,28 @@ const UseFetchMovies = () => {
       return postMovies(moviesData);
     },
   });
+  const updateMutation = useMutation({
+    mutationKey: ["movies"],
+    mutationFn: (movies) => {
+      return updateMovie(movies);
+    },
+  });
   const deleteMutation = useMutation({
     mutationKey: ["movies"],
     mutationFn: (movieId) => {
       return deleteMovie(movieId);
     },
   });
-  return { isLoading, error, isError, data, mutation, deleteMutation, getId };
+  return {
+    isLoading,
+    error,
+    isError,
+    data,
+    mutation,
+    deleteMutation,
+    getId,
+    updateMutation,
+  };
 };
 
 export default UseFetchMovies;

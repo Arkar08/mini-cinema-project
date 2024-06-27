@@ -7,8 +7,15 @@ import { township } from "../Data/data";
 export const CustomerContext = createContext();
 
 const CustomerContextProvider = ({ children }) => {
-  const { isLoading, isError, error, customers, mutations, deleteId } =
-    UseFetchCustomer();
+  const {
+    isLoading,
+    isError,
+    error,
+    customers,
+    mutations,
+    deleteId,
+    updateMutation,
+  } = UseFetchCustomer();
 
   const [newCustomer, setNewCustomer] = useState({
     fullName: "",
@@ -18,8 +25,71 @@ const CustomerContextProvider = ({ children }) => {
     townshipCode: "",
     dateOfBirth: "",
   });
+  const [editCustomer, setEditCustomer] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    stateCode: "",
+    townshipCode: "",
+    dateOfBirth: "",
+  });
   const [create, setCreate] = useState(false);
 
+  const getStateCode = (stateCode) => {
+    const newState = data?.find((s) => {
+      return (s.StateCode = stateCode);
+    });
+    if (newState) {
+      return newState.StateName;
+    } else {
+      return "Unknown";
+    }
+  };
+  const getTownshipCode = (townshipCode) => {
+    const newState = township?.find((s) => {
+      return (s.TownshipCode = townshipCode);
+    });
+    if (newState) {
+      return newState.TownshipName;
+    } else {
+      return "Unknown";
+    }
+  };
+
+  const editChange = (e) => {
+    const { name, value } = e.target;
+    setEditCustomer((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+  const handleEditTownship = (value) => {
+    if (value) {
+      const editTownship = township.find((t) => {
+        return t.TownshipName === value;
+      });
+      setEditCustomer((prev) => {
+        return { ...prev, townshipCode: editTownship.TownshipCode };
+      });
+    }
+  };
+  const handleEditState = (value) => {
+    if (value) {
+      const editState = data.find((f) => {
+        return f.StateName === value;
+      });
+      setEditCustomer((prev) => {
+        return { ...prev, stateCode: editState.StateCode };
+      });
+    }
+  };
+
+  const editSave = () => {
+    if (!editCustomer) {
+      console.error("edit Customer is undefined or null");
+    }
+    updateMutation.mutate(editCustomer);
+    window.location.href = "/admin/customer";
+  };
   const handleCreate = () => {
     setCreate(!create);
   };
@@ -60,6 +130,9 @@ const CustomerContextProvider = ({ children }) => {
     return newCustomer.stateCode === t.StateCode;
   });
 
+  const editTownship = township.filter((t) => {
+    return editCustomer.stateCode === t.StateCode;
+  });
   const handleTownship = (value) => {
     setNewCustomer((prev) => {
       return { ...prev, townshipCode: value };
@@ -97,6 +170,15 @@ const CustomerContextProvider = ({ children }) => {
         handleTownship,
         checkDisabled,
         handleDelete,
+        editCustomer,
+        setEditCustomer,
+        getStateCode,
+        getTownshipCode,
+        editChange,
+        editSave,
+        handleEditTownship,
+        handleEditState,
+        editTownship,
       }}
     >
       {children}
