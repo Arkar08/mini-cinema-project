@@ -19,7 +19,8 @@ export const authMiddleware = async (req, res, next) => {
 };
 
 export const authorizeAdmin = (req, res, next) => {
-  if (req.user && req.user.isAdmin) {
+  if (req.user && req.user.isAdmin === true) {
+    console.log(req.user);
     next();
   } else {
     res.status(401).json("not authorized as an admin");

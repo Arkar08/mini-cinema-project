@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema(
   {
-    cinemaId: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Cinemas",
+      ref: "User",
       required: true,
     },
     movieId: {
@@ -12,15 +12,35 @@ const bookingSchema = new mongoose.Schema(
       ref: "Movies",
       required: true,
     },
-    movieSeat: [
-      {
-        seatPriceId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "SeatPrice",
-          required: true,
-        },
-      },
-    ],
+    seatId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Seats",
+      required: true,
+    },
+    roomId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Rooms",
+      required: true,
+    },
+    cinemaId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cinemas",
+      required: true,
+    },
+    seatPricId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SeatPrice",
+      required: true,
+    },
+    showDate: {
+      type: Date,
+      default: Date.now(),
+      required: true,
+    },
+    showTime: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
