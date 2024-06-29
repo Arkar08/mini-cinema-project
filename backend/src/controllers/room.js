@@ -30,8 +30,8 @@ export const postRoomController = async (req, res) => {
 
 export const getRoomController = async (req, res) => {
   try {
-    const getRoom = await Rooms.find();
-    return res.status(200).json(getRoom);
+    const Room = await Rooms.find();
+    return res.status(200).json({ Room });
   } catch (error) {
     console.log("getRoomController", error);
     return res.status(500).json("internet server error");

@@ -7,13 +7,14 @@ import {
 import {
   authMiddleware,
   authorizeAdmin,
+  authorizeUser,
 } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 //admin route
-router.get("/:", authMiddleware, authorizeAdmin, getBookingAdminController);
+router.get("/admin", authMiddleware, authorizeAdmin, getBookingAdminController);
 
 // user route
-router.post("/", authMiddleware, postBookingController);
-router.get("/", authMiddleware, getBookingUserController);
+router.post("/user", authMiddleware, postBookingController);
+router.get("/user", authMiddleware, authorizeUser, getBookingUserController);
 export default router;

@@ -4,7 +4,7 @@ import Movies from "../models/movieSchema.js";
 export const getMovieControllers = async (req, res) => {
   try {
     const movies = await Movies.find();
-    return res.status(200).json(movies);
+    return res.status(200).json({ movies });
   } catch (error) {
     console.log("getMovieControllers", error);
     return res.status(500).json("internet server error");

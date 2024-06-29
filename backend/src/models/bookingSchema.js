@@ -27,7 +27,7 @@ const bookingSchema = new mongoose.Schema(
       ref: "Cinemas",
       required: true,
     },
-    seatPricId: {
+    seatPriceId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "SeatPrice",
       required: true,
