@@ -1,11 +1,11 @@
+import { Outlet } from "react-router-dom";
 import UserNav from "../components/UserNav";
-import HomeUser from "../pages/UserView/HomeUser";
 
 const User = () => {
   return (
     <div className="relative">
       <UserNav />
-      <HomeUser />
+      <Outlet />
     </div>
   );
 };

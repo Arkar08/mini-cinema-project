@@ -19,6 +19,9 @@ import EditSeat from "../pages/Seat/EditSeat.jsx";
 import EditPrice from "../pages/SeatPrice/EditPrice.jsx";
 import EditCinema from "../pages/Cinema/EditCinema.jsx";
 import EditMovie from "../pages/Movie/EditMovie.jsx";
+import RoomUser from "../pages/UserView/RoomUser.jsx";
+import HomeUser from "../pages/UserView/HomeUser.jsx";
+import SeatUser from "../pages/UserView/SeatUser.jsx";
 
 const getPermission = () => {
   return localStorage.getItem("isAdmin") === "true";
@@ -100,15 +103,26 @@ const routes = [
             <User />
           </ProvideRoute>
         ),
+        errorElement: <NotFound />,
+        children: [
+          {
+            index: true,
+            Component: HomeUser,
+          },
+          {
+            path: "user/cinema",
+            Component: CinemaUser,
+          },
+          {
+            path: "user/cinema/:movieId",
+            Component: RoomUser,
+          },
+          {
+            path: "user/seat",
+            Component: SeatUser,
+          },
+        ],
       },
-  {
-    path: "/user/cinema",
-    element: (
-      <ProvideRoute>
-        <CinemaUser />
-      </ProvideRoute>
-    ),
-  },
   {
     path: "/login",
     Component: Login,

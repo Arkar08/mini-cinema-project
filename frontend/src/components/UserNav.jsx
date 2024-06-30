@@ -23,7 +23,7 @@ const UserNav = () => {
   });
   const user = localStorage.getItem("login");
   return (
-    <div className="flex justify-between items-center border-b-2 p-4 bg-black text-red-500 h-[90px] sticky top-0">
+    <div className="flex justify-between items-center shadow-sm shadow-white p-4 bg-black text-red-500 h-[90px] sticky top-0">
       <Link to="/" className="flex items-center p-2">
         <h1 className="text-xl mr-2">Sein movie Booking</h1>
         <img
