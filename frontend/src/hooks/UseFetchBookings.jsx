@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import Axios from "../Api/Apiconfig";
 
 const getBookings = async () => {
-  const res = await Axios.get("/bookings");
+  const res = await Axios.get("/bookings/admin");
   return res.data;
 };
 

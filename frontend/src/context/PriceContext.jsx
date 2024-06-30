@@ -2,14 +2,12 @@
 import { createContext, useContext, useState } from "react";
 import UseFetchPrice from "../hooks/UseFetchPrice";
 import { SeatContext } from "./SeatContext";
-import { RoomContext } from "./RoomContext";
 
 export const PriceContext = createContext();
 
 const PriceContextProvider = ({ children }) => {
   const [active, setActive] = useState(false);
   const { seats } = useContext(SeatContext);
-  const { rooms } = useContext(RoomContext);
   const [newPrice, setNewPrice] = useState({
     price: "",
     roomId: "",
@@ -102,10 +100,6 @@ const PriceContextProvider = ({ children }) => {
       return { ...prev, price: Number(e.target.value) };
     });
   };
-  const sortData = rooms?.sort((a, b) => {
-    return a.roomName.localeCompare(b.roomName);
-  });
-
   const getType = (type) => {
     const seatGet = seats?.find((s) => {
       return s.rowName === type;
@@ -151,7 +145,6 @@ const PriceContextProvider = ({ children }) => {
         postRoom,
         newPrice,
         postPrice,
-        sortData,
         handleSeatRow,
         handleSeatNo,
         savePrice,

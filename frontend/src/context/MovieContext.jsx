@@ -99,6 +99,16 @@ const MovieContextProvider = ({ children }) => {
       window.location.reload();
     }
   };
+  const getMovieName = (movieId) => {
+    const getMovie = movies?.find((m) => {
+      return m._id === movieId;
+    });
+    if (getMovie) {
+      return getMovie.title;
+    } else {
+      return "Unknown";
+    }
+  };
   return (
     <MovieContext.Provider
       value={{
@@ -122,6 +132,7 @@ const MovieContextProvider = ({ children }) => {
         editMovies,
         updateChange,
         updateSave,
+        getMovieName,
       }}
     >
       {children}

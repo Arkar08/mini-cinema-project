@@ -59,6 +59,17 @@ const SeatContextProvider = ({ children }) => {
     return setActiveSeat(Number(e.target.id));
   };
 
+  const getSeatName = (id) => {
+    const getSeat = seats?.find((s) => {
+      return s._id === id;
+    });
+    if (getSeat) {
+      return getSeat.rowName + getSeat.seatNo;
+    } else {
+      return "Unknown";
+    }
+  };
+
   const handleSeatRow = (value) => {
     setEditSeat((prev) => {
       return { ...prev, rowName: value };
@@ -112,9 +123,6 @@ const SeatContextProvider = ({ children }) => {
       return "Unknown";
     }
   };
-  const sortRoom = rooms?.sort((a, b) => {
-    return a.roomName.localeCompare(b.roomName);
-  });
   const handleRoom = (value) => {
     setNewSeat((prev) => {
       return { ...prev, roomId: value };
@@ -163,7 +171,6 @@ const SeatContextProvider = ({ children }) => {
         handleSeatType,
         handleRowName,
         seatSave,
-        sortRoom,
         handeldeleteSeat,
         setEditSeat,
         editSeat,
@@ -177,6 +184,7 @@ const SeatContextProvider = ({ children }) => {
         prevClick,
         pages,
         activeSeat,
+        getSeatName,
       }}
     >
       {children}

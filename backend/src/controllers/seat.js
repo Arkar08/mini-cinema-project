@@ -36,7 +36,7 @@ export const postSeatController = async (req, res) => {
 export const getSeatController = async (req, res) => {
   try {
     const Seat = await Seats.find();
-    return res.status(200).json({ Seat });
+    return res.status(200).json(Seat);
   } catch (error) {
     console.log("getSeatController", error);
     return res.status(500).json("internet server error");

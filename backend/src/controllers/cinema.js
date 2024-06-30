@@ -23,7 +23,7 @@ export const postCinemaController = async (req, res) => {
 export const getCinemaController = async (req, res) => {
   try {
     const Cinema = await Cinemas.find();
-    return res.status(200).json({ Cinema });
+    return res.status(200).json(Cinema);
   } catch (error) {
     console.log("getCinemaController", error);
     return res.status(500).json("internet server error");

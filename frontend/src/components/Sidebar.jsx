@@ -13,7 +13,7 @@ const Sidebar = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-[40px] h-[40px] rounded-md object-cover object-center"
+            className="w-[40px] h-[40px] rounded-md object-cover object-center m-2"
           />
         </div>
       </Link>

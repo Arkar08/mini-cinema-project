@@ -26,6 +26,7 @@ const RoomContextProvider = ({ children }) => {
     roomNo: "",
   });
   const { cinemas } = useContext(CinemaContext);
+
   const [active, setActive] = useState(1);
   const [itemPerPage] = useState(1);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
@@ -88,6 +89,18 @@ const RoomContextProvider = ({ children }) => {
       return "Unknown";
     }
   };
+
+  const getRoomName = (id) => {
+    const getRoom = rooms?.find((r) => {
+      return r._id === id;
+    });
+    if (getRoom) {
+      return getRoom.roomName;
+    } else {
+      return "Unknown";
+    }
+  };
+
   const handleEditSave = () => {
     if (!editRoom) {
       console.error("editRoom is undefined or null");
@@ -136,9 +149,6 @@ const RoomContextProvider = ({ children }) => {
       return { ...prev, roomNo: no };
     });
   };
-  const sortCinema = cinemas?.sort((a, b) => {
-    return a.name.localeCompare(b.name);
-  });
 
   const handleDeleteRoom = (id) => {
     const confirm = window.confirm("Are you want to delete?");
@@ -162,7 +172,6 @@ const RoomContextProvider = ({ children }) => {
         handleRoomChange,
         handleCinemaId,
         handleRoomNo,
-        sortCinema,
         handleDeleteRoom,
         handleEditCinemaId,
         handleEditRoomChange,
@@ -176,6 +185,7 @@ const RoomContextProvider = ({ children }) => {
         nextClick,
         prevClick,
         handleClick,
+        getRoomName,
       }}
     >
       {children}

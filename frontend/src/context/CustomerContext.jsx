@@ -82,6 +82,16 @@ const CustomerContextProvider = ({ children }) => {
       });
     }
   };
+  const getCustomerName = (id) => {
+    const getCustomer = customers.find((c) => {
+      return c._id === id;
+    });
+    if (getCustomer) {
+      return getCustomer.fullName;
+    } else {
+      return "Unknown";
+    }
+  };
 
   const editSave = () => {
     if (!editCustomer) {
@@ -179,6 +189,7 @@ const CustomerContextProvider = ({ children }) => {
         handleEditTownship,
         handleEditState,
         editTownship,
+        getCustomerName,
       }}
     >
       {children}

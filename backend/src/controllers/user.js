@@ -49,9 +49,9 @@ export const postUserController = async (req, res) => {
 // get user
 export const getUserController = async (req, res) => {
   try {
-    const User = await User.find({});
-    if (User) {
-      return res.status(200).json({ User });
+    const Users = await User.find({});
+    if (Users) {
+      return res.status(200).json(Users);
     } else {
       return res.sendStatus(400);
     }
