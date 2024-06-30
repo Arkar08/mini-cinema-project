@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+import UserNav from "../components/UserNav";
+import HomeUser from "../pages/UserView/HomeUser";
 
 const User = () => {
   return (
-    <div>
-      <h1>hello</h1>
-      <Outlet />
+    <div className="relative">
+      <UserNav />
+      <HomeUser />
     </div>
   );
 };

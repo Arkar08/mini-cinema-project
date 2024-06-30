@@ -12,7 +12,6 @@ import Login from "../pages/Login.jsx";
 import Signup from "../pages/Signup.jsx";
 import ProvideRoute from "../layouts/ProvideRoute.jsx";
 import User from "../layouts/User.jsx";
-import HomeUser from "../pages/UserView/HomeUser.jsx";
 import CinemaUser from "../pages/UserView/CinemaUser.jsx";
 import EditCustomer from "../pages/Customer/EditCustomer.jsx";
 import EditRoom from "../pages/Room/EditRoom.jsx";
@@ -101,18 +100,15 @@ const routes = [
             <User />
           </ProvideRoute>
         ),
-        errorElement: <NotFound />,
-        children: [
-          {
-            index: true,
-            Component: HomeUser,
-          },
-          {
-            path: "user/cinema",
-            Component: CinemaUser,
-          },
-        ],
       },
+  {
+    path: "/user/cinema",
+    element: (
+      <ProvideRoute>
+        <CinemaUser />
+      </ProvideRoute>
+    ),
+  },
   {
     path: "/login",
     Component: Login,
