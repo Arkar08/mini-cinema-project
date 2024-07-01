@@ -11,7 +11,6 @@ const CardSeat = () => {
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
       <thead>
         <tr className="text-center p-8 border bg-red-500 text-white">
-          <th>Id</th>
           <th>RoomName</th>
           <th>SeatNo</th>
           <th>RowName</th>
@@ -24,7 +23,6 @@ const CardSeat = () => {
           currentItem.map((s) => {
             return (
               <tr className="text-center  border text-red-500" key={s._id}>
-                <td className="p-2">{s._id}</td>
                 <td className="p-2 uppercase">{getRoomName(s.roomId)}</td>
                 <td className="p-2">{s.seatNo}</td>
                 <td className="p-2">{s.rowName}</td>

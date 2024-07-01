@@ -10,7 +10,6 @@ const PriceTable = () => {
     <table className="border-collapse w-[95%] border mt-4 mx-auto">
       <thead>
         <tr className="text-center p-4 border bg-red-500 text-white">
-          <th>Id</th>
           <th>RoomName</th>
           <th>RowName</th>
           <th>SeatType</th>
@@ -23,11 +22,10 @@ const PriceTable = () => {
           currentItem.map((p) => {
             return (
               <tr className="text-center  border text-red-500" key={p._id}>
-                <td className="p-2">{p._id}</td>
                 <td className="p-2">{getRoomName(p.roomId)}</td>
                 <td className="p-2">{p.rowName}</td>
                 <td className="p-2 text-green-500">{getType(p.rowName)}</td>
-                <td className="p-2 text-right">{p.price} Ks</td>
+                <td className="text-right">{p.price}</td>
                 <td className="flex p-2 items-center justify-center">
                   <Link to={`/admin/price/${p._id}`}>
                     <FaEdit

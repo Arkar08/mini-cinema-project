@@ -38,7 +38,14 @@ const LoginContextProvider = ({ children }) => {
   }, [loginMutations.isSuccess, loginMutations.isError, error]);
 
   return (
-    <LoginContext.Provider value={{ handleChange, user, handleSubmit, error }}>
+    <LoginContext.Provider
+      value={{
+        handleChange,
+        user,
+        handleSubmit,
+        error,
+      }}
+    >
       {children}
     </LoginContext.Provider>
   );

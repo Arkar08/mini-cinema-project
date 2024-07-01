@@ -4,6 +4,7 @@ import { RoomContext } from "../../context/RoomContext";
 import { MovieContext } from "../../context/MovieContext";
 import { SeatContext } from "../../context/SeatContext";
 import { CustomerContext } from "../../context/CustomerContext";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
 /* eslint-disable react/prop-types */
@@ -34,7 +35,7 @@ const BookingTable = () => {
             return (
               <tr className="text-center  text-red-500" key={b._id}>
                 <td className=" p-2">{getMovieName(b.movieId)}</td>
-                <td className=" p-2 uppercase">{getCinemaName(b.cinemaId)}</td>
+                <td className=" p-2">{getCinemaName(b.cinemaId)}</td>
                 <td className=" p-2">{getCustomerName(b.userId)}</td>
                 <td className=" p-2">{getRoomName(b.roomId)}</td>
                 <td className=" p-2">{moment(b.showDate).format("L")}</td>
@@ -42,9 +43,12 @@ const BookingTable = () => {
                 <td className=" p-2">{getSeatName(b.seatId)}</td>
                 <td className=" p-2 text-right">{b.seatPriceId}</td>
                 <td className=" p-2">
-                  <button className="bg-red-500 text-white px-2 outline-none border-none rounded-md">
+                  <Link
+                    to={`/admin/booking/${b._id}`}
+                    className="bg-red-500 text-white px-2 py-1 outline-none border-none rounded-md"
+                  >
                     Print
-                  </button>
+                  </Link>
                 </td>
               </tr>
             );

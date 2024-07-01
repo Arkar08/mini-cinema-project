@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { SeatContext } from "../../context/SeatContext";
 import { dataRow, dataSeatNo, type } from "../../Data/data";
+import { RoomContext } from "../../context/RoomContext";
 
 const CreateSeat = () => {
   const {
@@ -25,8 +26,9 @@ const CreateSeat = () => {
     handleSeatType,
     handleRowName,
     seatSave,
-    sortRoom,
   } = useContext(SeatContext);
+
+  const { rooms } = useContext(RoomContext);
 
   return (
     <Dialog
@@ -56,12 +58,12 @@ const CreateSeat = () => {
             <Select
               size="md"
               label="Select SeatNo"
-              value={newSeat.seatNo}
+              value={newSeat?.seatNo}
               onChange={handleSeatNo}
             >
               {dataSeatNo.map((d, index) => {
                 return (
-                  <Option key={index} value={d}>
+                  <Option key={index} value={d.toString()}>
                     {d}
                   </Option>
                 );
@@ -76,7 +78,7 @@ const CreateSeat = () => {
             <Select
               size="md"
               label="Select RowName"
-              value={newSeat.rowName}
+              value={newSeat?.rowName}
               onChange={handleRowName}
             >
               {dataRow.map((d, index) => {
@@ -95,11 +97,14 @@ const CreateSeat = () => {
             <Select
               size="md"
               label="Select RoomName"
-              value={newSeat.roomId}
+              value={newSeat?.roomId}
               onChange={handleRoom}
             >
-              {sortRoom &&
-                sortRoom.map((c, index) => {
+              {rooms
+                ?.sort((a, b) => {
+                  return a.roomName.localeCompare(b.roomName);
+                })
+                .map((c, index) => {
                   return (
                     <Option key={index} value={c._id}>
                       {c.roomName}

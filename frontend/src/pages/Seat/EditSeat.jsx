@@ -14,12 +14,12 @@ import { SeatContext } from "../../context/SeatContext";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import UseFetchSeat from "../../hooks/UseFetchSeat";
+import { RoomContext } from "../../context/RoomContext";
 
 const EditSeat = () => {
   const { seatId } = useParams();
   const { getId } = UseFetchSeat();
   const {
-    sortRoom,
     setEditSeat,
     editSeat,
     getRoomName,
@@ -37,6 +37,7 @@ const EditSeat = () => {
       },
     }
   );
+  const { rooms } = useContext(RoomContext);
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching room with ID {seatId}</p>;
 
@@ -85,13 +86,17 @@ const EditSeat = () => {
             value={getRoomName(editSeat?.roomId)}
             onChange={handleSeatRoom}
           >
-            {sortRoom?.map((c, index) => {
-              return (
-                <Option key={index} value={c.roomName}>
-                  {c.roomName}
-                </Option>
-              );
-            })}
+            {rooms
+              ?.sort((a, b) => {
+                return a.roomName.localeCompare(b.roomName);
+              })
+              .map((c, index) => {
+                return (
+                  <Option key={index} value={c.roomName}>
+                    {c.roomName}
+                  </Option>
+                );
+              })}
           </Select>
         </div>
         <div className="flex w-[100%] flex-col gap-6">

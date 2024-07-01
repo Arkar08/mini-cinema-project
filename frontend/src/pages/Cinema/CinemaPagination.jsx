@@ -7,7 +7,7 @@ const CinemaPagination = () => {
   const { activeCinema, handle, pages, nextClick, prevClick } =
     useContext(CinemaContext);
   return (
-    <div className="flex items-center gap-4 absolute bottom-6 right-2">
+    <div className="flex items-center gap-4 absolute bottom-4 right-2">
       <Button
         variant="text"
         className="flex items-center gap-2 rounded-full"

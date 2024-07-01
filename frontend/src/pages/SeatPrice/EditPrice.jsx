@@ -15,11 +15,11 @@ import { dataRow, dataSeatNo } from "../../Data/data";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import UseFetchPrice from "../../hooks/UseFetchPrice";
+import { RoomContext } from "../../context/RoomContext";
 
 const EditPrice = () => {
   const { priceId } = useParams();
   const {
-    sortData,
     setEditPrice,
     editPrice,
     postEditPrice,
@@ -37,6 +37,7 @@ const EditPrice = () => {
       },
     }
   );
+  const { rooms } = useContext(RoomContext);
   const { getId } = UseFetchPrice();
 
   if (isLoading) return <p>Loading...</p>;
@@ -67,13 +68,17 @@ const EditPrice = () => {
             value={editPrice?.roomId}
             onChange={editRoom}
           >
-            {sortData?.map((c) => {
-              return (
-                <Option key={c._id} value={c._id}>
-                  {c.roomName}
-                </Option>
-              );
-            })}
+            {rooms
+              ?.sort((a, b) => {
+                return a.roomName.localeCompare(b.roomName);
+              })
+              .map((c) => {
+                return (
+                  <Option key={c._id} value={c._id}>
+                    {c.roomName}
+                  </Option>
+                );
+              })}
           </Select>
         </div>
         <div className="flex w-[100%] flex-col gap-4">

@@ -3,6 +3,7 @@ import {
   getBookingAdminController,
   postBookingController,
   getBookingUserController,
+  getBookingIdAdminController,
 } from "../controllers/booking.js";
 import {
   authMiddleware,
@@ -12,9 +13,25 @@ import {
 
 const router = express.Router();
 //admin route
-router.get("/admin", authMiddleware, authorizeAdmin, getBookingAdminController);
+router.get(
+  "/admin/bookings",
+  authMiddleware,
+  authorizeAdmin,
+  getBookingAdminController
+);
+router.get(
+  "/admin/bookings/:id",
+  authMiddleware,
+  authorizeAdmin,
+  getBookingIdAdminController
+);
 
 // user route
-router.post("/user", authMiddleware, postBookingController);
-router.get("/user", authMiddleware, authorizeUser, getBookingUserController);
+router.post("/user/bookings", authMiddleware, postBookingController);
+router.get(
+  "/user/bookings",
+  authMiddleware,
+  authorizeUser,
+  getBookingUserController
+);
 export default router;

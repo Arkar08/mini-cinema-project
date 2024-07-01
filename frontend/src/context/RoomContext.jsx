@@ -26,9 +26,10 @@ const RoomContextProvider = ({ children }) => {
     roomNo: "",
   });
   const { cinemas } = useContext(CinemaContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [active, setActive] = useState(1);
-  const [itemPerPage] = useState(1);
+  const [itemPerPage] = useState(8);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
   const pages = [];
@@ -122,13 +123,16 @@ const RoomContextProvider = ({ children }) => {
   };
 
   const handleRoomSave = () => {
+    if (!newRoom) {
+      console.error("New Room is undefined or null");
+    }
     mutations.mutate(newRoom);
-    setIsopen(!isopen);
+    setIsOpen(!isOpen);
     window.location.reload();
   };
-  const [isopen, setIsopen] = useState(false);
+
   const handleOpen = () => {
-    setIsopen(!isopen);
+    setIsOpen(!isOpen);
   };
   const handleRoomChange = (value) => {
     setNewRoom((prev) => {
@@ -161,7 +165,7 @@ const RoomContextProvider = ({ children }) => {
     <RoomContext.Provider
       value={{
         handleOpen,
-        isopen,
+        isOpen,
         rooms,
         isLoading,
         isError,

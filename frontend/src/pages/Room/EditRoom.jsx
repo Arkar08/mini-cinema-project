@@ -14,10 +14,10 @@ import { RoomContext } from "../../context/RoomContext";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import UseFetchRoom from "../../hooks/UseFetchRoom";
+import { CinemaContext } from "../../context/CinemaContext";
 
 const EditRoom = () => {
   const {
-    sortCinema,
     setEditRoom,
     getCinemaName,
     handleEditCinemaId,
@@ -27,6 +27,7 @@ const EditRoom = () => {
     handleEditSave,
   } = useContext(RoomContext);
   const { getId } = UseFetchRoom();
+  const { cinemas } = useContext(CinemaContext);
 
   const { roomId } = useParams();
   const { isLoading, isError } = useQuery(
@@ -88,13 +89,17 @@ const EditRoom = () => {
               onChange={handleEditCinemaId}
               value={getCinemaName(editRoom?.cinemaId)}
             >
-              {sortCinema?.map((c, index) => {
-                return (
-                  <Option key={index} value={c.name}>
-                    {c.name}
-                  </Option>
-                );
-              })}
+              {cinemas
+                ?.sort((a, b) => {
+                  return a.name.localeCompare(b.name);
+                })
+                .map((c, index) => {
+                  return (
+                    <Option key={index} value={c.name}>
+                      {c.name}
+                    </Option>
+                  );
+                })}
             </Select>
           </div>
           <div className="w-[100%] flex-col gap-6 flex">

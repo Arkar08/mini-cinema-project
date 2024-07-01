@@ -34,7 +34,7 @@ const PriceContextProvider = ({ children }) => {
   } = UseFetchPrice();
 
   const [activePrice, setActivePrice] = useState(1);
-  const [itemPerPage] = useState(2);
+  const [itemPerPage] = useState(8);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
   const pages = [];

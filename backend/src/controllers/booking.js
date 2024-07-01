@@ -66,3 +66,17 @@ export const getBookingAdminController = async (req, res) => {
     return res.status(500).json("internet server error");
   }
 };
+export const getBookingIdAdminController = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const BookingId = await Booking.findById({ _id: id });
+    if (BookingId) {
+      return res.status(200).json(BookingId);
+    } else {
+      return res.status(400).json("invalid Id");
+    }
+  } catch (error) {
+    console.log("getBookingIdAdminController", error);
+    return res.status(500).json("internet server error");
+  }
+};

@@ -22,6 +22,7 @@ import EditMovie from "../pages/Movie/EditMovie.jsx";
 import RoomUser from "../pages/UserView/RoomUser.jsx";
 import HomeUser from "../pages/UserView/HomeUser.jsx";
 import SeatUser from "../pages/UserView/SeatUser.jsx";
+import PrintBooking from "../pages/Booking/PrintBooking.jsx";
 
 const getPermission = () => {
   return localStorage.getItem("isAdmin") === "true";
@@ -93,6 +94,10 @@ const routes = [
           {
             path: "admin/booking",
             Component: Booking,
+          },
+          {
+            path: "admin/booking/:printId",
+            Component: PrintBooking,
           },
         ],
       }

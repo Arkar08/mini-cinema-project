@@ -16,7 +16,7 @@ const Card = ({ c }) => {
   };
   return (
     <div
-      className="border cursor-pointer text-center rounded-md bg-black text-red-600 h-[200px] relative"
+      className="border cursor-pointer text-center rounded-md  text-red-600 h-[200px] relative"
       key={c._id}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -26,7 +26,7 @@ const Card = ({ c }) => {
         alt="cinema_image"
         className="w-[95%] h-[80%] p-2 rounded-lg object-cover object-center mx-auto"
       />
-      <h2 className=" px-2 uppercase">{c.name}</h2>
+      <h2 className=" px-2">{c.name}</h2>
       <div
         className={`absolute bg-gray-600 w-[50px] h-[64%] top-2 right-0 flex flex-col items-center justify-center transition-opacity duration-300  ${
           active ? "opacity-100" : "opacity-0"
