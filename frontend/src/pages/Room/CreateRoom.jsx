@@ -67,6 +67,25 @@ const CreateRoom = () => {
               })}
             </Select>
           </div>
+          <div className="w-[100%] flex-col gap-4 flex">
+            <Typography className="-mb-2 text-red-400" variant="h6">
+              Room No
+            </Typography>
+            <Select
+              size="md"
+              label="Select Room No"
+              value={newRoom?.roomNo}
+              onChange={handleRoomNo}
+            >
+              {dataNo.map((n, index) => {
+                return (
+                  <Option key={index} value={n}>
+                    {n}
+                  </Option>
+                );
+              })}
+            </Select>
+          </div>
           <div className="flex w-[100%] flex-col gap-4">
             <Typography className="-mb-2 text-red-400" variant="h6">
               Cinema Name
@@ -88,25 +107,6 @@ const CreateRoom = () => {
                     </Option>
                   );
                 })}
-            </Select>
-          </div>
-          <div className="w-[100%] flex-col gap-4 flex">
-            <Typography className="-mb-2 text-red-400" variant="h6">
-              Room No
-            </Typography>
-            <Select
-              size="md"
-              label="Select Room No"
-              value={newRoom?.roomNo}
-              onChange={handleRoomNo}
-            >
-              {dataNo.map((n, index) => {
-                return (
-                  <Option key={index} value={n}>
-                    {n}
-                  </Option>
-                );
-              })}
             </Select>
           </div>
         </CardBody>

@@ -6,7 +6,7 @@ import UseLoginMutations from "../hooks/UseLoginMutations";
 export const LoginContext = createContext();
 
 const LoginContextProvider = ({ children }) => {
-  const loginMutations = UseLoginMutations();
+  const mutations = UseLoginMutations();
   const [error, setError] = useState(null);
   const [user, setUser] = useState({
     email: "",
@@ -22,20 +22,24 @@ const LoginContextProvider = ({ children }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    loginMutations.mutate(user);
+    if (user) {
+      e.preventDefault();
+      mutations.mutate(user);
+    } else {
+      console.log("user is not exist");
+    }
   };
   useEffect(() => {
-    if (loginMutations.isSuccess) {
-      localStorage.setItem("token", loginMutations.data.token);
-      localStorage.setItem("login", loginMutations.data.email);
-      localStorage.setItem("isAdmin", loginMutations.data.isAdmin);
+    if (mutations.isSuccess) {
+      localStorage.setItem("token", mutations.data.token);
+      localStorage.setItem("login", mutations.data.email);
+      localStorage.setItem("isAdmin", mutations.data.isAdmin);
       window.location.href = "/";
     }
-    if (loginMutations.isError) {
+    if (mutations.isError) {
       setError(error);
     }
-  }, [loginMutations.isSuccess, loginMutations.isError, error]);
+  }, [mutations.isSuccess, mutations.isError, error]);
 
   return (
     <LoginContext.Provider

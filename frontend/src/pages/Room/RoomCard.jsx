@@ -10,8 +10,8 @@ const RoomCard = () => {
       <thead>
         <tr className="text-center p-8 border bg-red-500 text-white">
           <th>CinemaName</th>
-          <th>RoomNo</th>
           <th>RoomName</th>
+          <th>RoomNo</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -21,8 +21,8 @@ const RoomCard = () => {
             return (
               <tr className="text-center  border text-red-500" key={r._id}>
                 <td className="p-2 uppercase">{getCinemaName(r.cinemaId)}</td>
-                <td className="p-2">{r.roomNo}</td>
                 <td className="p-2 text-green-500">{r.roomName}</td>
+                <td className="p-2">{r.roomNo}</td>
                 <td className="flex p-2 items-center justify-center">
                   <Link to={`/admin/room/${r._id}`}>
                     {" "}

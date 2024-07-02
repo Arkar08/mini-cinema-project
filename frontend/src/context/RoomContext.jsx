@@ -29,7 +29,7 @@ const RoomContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [active, setActive] = useState(1);
-  const [itemPerPage] = useState(8);
+  const [itemPerPage] = useState(10);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
   const pages = [];
@@ -128,7 +128,7 @@ const RoomContextProvider = ({ children }) => {
     }
     mutations.mutate(newRoom);
     setIsOpen(!isOpen);
-    window.location.reload();
+    window.location.href = "/admin/room";
   };
 
   const handleOpen = () => {
