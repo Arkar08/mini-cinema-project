@@ -23,6 +23,7 @@ import RoomUser from "../pages/UserView/RoomUser.jsx";
 import HomeUser from "../pages/UserView/HomeUser.jsx";
 import SeatUser from "../pages/UserView/SeatUser.jsx";
 import PrintBooking from "../pages/Booking/PrintBooking.jsx";
+import PrintUser from "../pages/UserView/PrintUser.jsx";
 
 const getPermission = () => {
   return localStorage.getItem("isAdmin") === "true";
@@ -125,6 +126,10 @@ const routes = [
           {
             path: "user/seat",
             Component: SeatUser,
+          },
+          {
+            path: "user/seat/:printId",
+            Component: PrintUser,
           },
         ],
       },

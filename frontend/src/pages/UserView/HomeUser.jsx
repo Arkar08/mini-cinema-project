@@ -3,7 +3,7 @@ import UserComing from "../../components/UserComing";
 
 const HomeUser = () => {
   return (
-    <div className="p-8 bg-black">
+    <div className="p-8 ">
       <div>
         <h2 className="text-2xl text-red-500 font-bold">Now Showing</h2>
         <UserCard />

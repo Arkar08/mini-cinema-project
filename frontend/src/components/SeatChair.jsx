@@ -337,29 +337,29 @@ const SeatChair = () => {
           </div>
         </div>
       </div>
-      <div className="mt-8 grid grid-cols-4 gap-4 px-4">
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+      <div className="mt-8 grid grid-cols-4 gap-4 px-4 ">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           A12
         </div>
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           B12
         </div>
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           C12
         </div>
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           D12
         </div>
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           E12
         </div>
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           F12
         </div>
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           G12
         </div>
-        <div className="w-[100%] h-[100px] border text-xl text-red-500  flex items-center justify-center">
+        <div className="w-[100%] h-[100px] border-2 text-xl rounded-md text-red-500  flex items-center justify-center">
           H12
         </div>
       </div>

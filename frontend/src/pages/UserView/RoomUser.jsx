@@ -2,7 +2,7 @@ import UserRoom from "../../components/UserRoom";
 
 const RoomUser = () => {
   return (
-    <div className=" bg-black">
+    <div>
       <h2 className="text-red-500 text-center text-3xl pt-4">
         Movie Name - The Nun
       </h2>

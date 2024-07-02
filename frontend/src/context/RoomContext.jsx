@@ -29,7 +29,7 @@ const RoomContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [active, setActive] = useState(1);
-  const [itemPerPage] = useState(10);
+  const [itemPerPage] = useState(8);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
   const pages = [];

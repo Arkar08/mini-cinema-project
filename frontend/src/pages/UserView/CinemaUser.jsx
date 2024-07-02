@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 const CinemaUser = () => {
   return (
     <>
-      <Link to="/">Home</Link>
+      <h1 className="text-red-500 text-3xl font-bold text-center mt-4">
+        All Cinemas List
+      </h1>
     </>
   );
 };
