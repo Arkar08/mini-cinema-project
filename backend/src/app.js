@@ -30,7 +30,7 @@ app.use("/api/v1/rooms", roomRoute);
 app.use("/api/v1/seats", seatRoute);
 app.use("/api/v1/price", seatPriceRoute);
 app.use("/api/v1/users", userRoute);
-app.use("/api/v1", bookingRoute);
+app.use("/api/v1/bookings", bookingRoute);
 
 app.get("/", (req, res) => {
   return res.status(200).json("hello world");
